@@ -1,0 +1,84 @@
+# Livana — local development stack
+#
+# Wires together the three services needed to run the platform locally:
+#   - postgres      : the application database
+#   - backend       : the Java / Spring Boot API
+#   - ai-screening  : the Python / FastAPI AI screening service
+#
+# Secrets and shared values come from a root `.env` file (see `.env.example`).
+# Compose automatically loads `.env` from this directory and substitutes
+# `${VAR}` references below.
+#
+# IMPORTANT — shared secret:
+#   `AI_SCREENING_SHARED_SECRET` is the mutual `X-Internal-Secret` used in BOTH
+#   directions (backend -> ai-screening /screen and ai-screening -> backend
+#   /screening-callback). The backend reads it as `AI_SCREENING_SHARED_SECRET`
+#   and the ai-screening service reads it as `SHARED_SECRET`. Both MUST resolve
+#   to the SAME value, so both are wired from the single `${AI_SCREENING_SHARED_SECRET}`.
+#
+# Compose creates a default network for this project; services reach each other
+# by service name (e.g. http://ai-screening:8000, http://backend:8080).
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: livana
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d livana"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    # NOTE: a backend Dockerfile is ASSUMED to exist at ./backend/Dockerfile.
+    # One does not exist in the repo yet — the user must add it (a standard
+    # Spring Boot / Maven image build). The build context below is ./backend.
+    build: ./backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Inside the compose network postgres is reachable by service name.
+      DB_URL: jdbc:postgresql://postgres:5432/livana
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      # Reach the AI service by its compose service name.
+      AI_SCREENING_BASE_URL: http://ai-screening:8000
+      # Mutual shared secret — MUST match ai-screening's SHARED_SECRET below.
+      AI_SCREENING_SHARED_SECRET: ${AI_SCREENING_SHARED_SECRET}
+      # Base64-encoded 256-bit AES key for encrypting the Gemini key at rest.
+      AI_CONFIG_ENCRYPTION_KEY: ${AI_CONFIG_ENCRYPTION_KEY}
+      # Clerk Backend API secret key for server-to-server auth checks.
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+    ports:
+      - "8080:8080"
+
+  ai-screening:
+    build: ./ai-screening
+    depends_on:
+      # Soft dependency: the AI service only needs the backend at callback time.
+      # Listed so compose starts the backend first; not a hard health gate.
+      - backend
+    environment:
+      # Where the AI service POSTs screening results — the backend internal endpoint.
+      BACKEND_CALLBACK_URL: http://backend:8080/api/v1/internal/screening-callback
+      # Mutual shared secret — MUST match backend's AI_SCREENING_SHARED_SECRET above.
+      SHARED_SECRET: ${AI_SCREENING_SHARED_SECRET}
+      IPFS_GATEWAY_URL: ${IPFS_GATEWAY_URL:-https://gateway.pinata.cloud/ipfs/}
+      MAX_DOCUMENT_FILES: ${MAX_DOCUMENT_FILES:-5}
+      MAX_DOCUMENT_BYTES: ${MAX_DOCUMENT_BYTES:-10485760}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.0-flash}
+      # Platform infrastructure Tavily key (never sent over the wire).
+      TAVILY_API_KEY: ${TAVILY_API_KEY}
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres-data:

@@ -1,0 +1,27 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = ["@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"]
+fs_permissions = [{ access = "read-write", path = "./" }]
+
+# Default invariant config: continue-on-revert (for ContinueOnRevert tests)
+[profile.default.invariant]
+runs = 256
+depth = 128
+fail_on_revert = false
+
+# fail_on_revert profile — used for the tight handler tests
+[profile.fail_on_revert]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = ["@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"]
+fs_permissions = [{ access = "read-write", path = "./" }]
+
+[profile.fail_on_revert.invariant]
+runs = 256
+depth = 128
+fail_on_revert = true
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

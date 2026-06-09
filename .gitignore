@@ -1,0 +1,50 @@
+# IDE / Editor
+.vscode/
+.idea/
+**/.vscode/
+**/.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+**/application-local.properties
+
+# Build artifacts and temps
+tmp/
+temp/
+build/
+dist/
+target/
+**/target/
+**/build/
+**/dist/
+
+# Agent / Coding Assistant Files
+.agents/
+**/.agents/
+skills-lock.json
+**/skills-lock.json
+
+# Python Virtual Environments & Caches
+venv/
+.venv/
+**/venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+**/*.pyc
+.pytest_cache/
+**/.pytest_cache/
+
+# Smart Contracts logs, state, and outputs
+smartcontracts/out/
+smartcontracts/cache/
+smartcontracts/broadcast/
+**/anvil-state.json
+**/seed-data.json
