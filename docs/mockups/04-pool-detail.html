@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Pool detail</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .pdtabs input {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            position: static;
+        }
+
+        .tabbar {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--hairline);
+            margin: 18px 0 0;
+        }
+
+        .tabbar label {
+            flex: 1;
+            text-align: center;
+            padding: 11px 0;
+            font: 700 14px var(--font-sans);
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color .18s ease, border-color .18s ease;
+        }
+
+        .panel {
+            display: none;
+            padding-top: 16px;
+        }
+
+        #pd-about:checked~.tabbar label[for="pd-about"],
+        #pd-don:checked~.tabbar label[for="pd-don"],
+        #pd-proof:checked~.tabbar label[for="pd-proof"] {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        #pd-about:checked~.panel-about,
+        #pd-don:checked~.panel-don,
+        #pd-proof:checked~.panel-proof {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="screen__scroll">
+            <!-- hero -->
+            <div class="cover" style="height:268px;">
+                <img src="https://picsum.photos/seed/livana-flood/780/520" alt="" onerror="this.remove()" />
+                <div class="statusbar statusbar--light" style="padding-top:14px;">
+                    <span>9:41</span>
+                    <span class="statusbar__icons">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+                            <rect x="4" y="10" width="11" height="4" rx="1" />
+                            <rect x="21" y="10" width="2" height="4" rx="1" />
+                        </svg>
+                    </span>
+                </div>
+                <div
+                    style="position:absolute;top:48px;left:16px;right:16px;display:flex;justify-content:space-between;">
+                    <button class="chip iconbtn iconbtn--glass" aria-label="Back"><svg class="ico ico--sm"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M15 6l-6 6 6 6" />
+                        </svg></button>
+                    <button class="chip iconbtn iconbtn--glass" aria-label="Share"><svg class="ico ico--sm"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 16V4M8 8l4-4 4 4" />
+                            <path d="M5 14v5h14v-5" />
+                        </svg></button>
+                </div>
+                <div style="position:absolute;left:20px;bottom:18px;color:#fff;">
+                    <span class="pill pill--region">South Asia</span>
+                    <h1
+                        style="font-family:var(--font-display);font-weight:600;font-size:27px;margin:10px 0 0;letter-spacing:-0.01em;">
+                        Flood Relief Fund</h1>
+                </div>
+            </div>
+            <div class="screen__pad" style="padding-bottom:112px;">
+                <!-- progress card overlaps -->
+                <div class="card" style="margin-top:-30px;z-index:3;">
+                    <div style="display:flex;align-items:flex-end;gap:8px;">
+                        <span class="metric" style="font-size:36px;color:var(--text);">$5,000</span>
+                        <span class="muted" style="padding-bottom:6px;">of $10,000 goal</span>
+                    </div>
+                    <div class="progress" style="margin:14px 0 10px;">
+                        <div class="progress__fill" style="width:50%;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                        <span class="tiny muted">120 donors</span>
+                        <span class="tiny" style="color:var(--primary);font-weight:700;">$2,000 released</span>
+                    </div>
+                </div>
+                <!-- creator -->
+                <button
+                    style="all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:16px 4px;">
+                    <img class="avatar" style="width:46px;height:46px;" src="https://picsum.photos/seed/ngo-water/90/90"
+                        alt="" onerror="this.remove()" />
+                    <div style="flex:1;">
+                        <div style="font-weight:700;display:flex;align-items:center;gap:6px;">Clean Water Foundation
+                            <svg class="ico" style="width:15px;height:15px;color:var(--primary);stroke-width:2.6"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 12l4 4L19 6" />
+                            </svg>
+                        </div>
+                        <div class="tiny muted">5 SBTs · $15,000 released</div>
+                    </div>
+                    <svg class="ico ico--sm muted" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 6l6 6-6 6" />
+                    </svg>
+                </button>
+                <hr class="divider" />
+                <!-- switchable tabs: About / Donations / Proofs -->
+                <div class="pdtabs">
+                    <input type="radio" name="pd" id="pd-about" checked />
+                    <input type="radio" name="pd" id="pd-don" />
+                    <input type="radio" name="pd" id="pd-proof" />
+                    <div class="tabbar">
+                        <label for="pd-about">About</label>
+                        <label for="pd-don">Donations</label>
+                        <label for="pd-proof">Proofs</label>
+                    </div>
+
+                    <!-- About -->
+                    <div class="panel panel-about">
+                        <p class="muted" style="margin:0;font-size:14.5px;line-height:1.6;">Emergency aid for
+                            flood-affected communities across the region — clean water, food parcels, and temporary
+                            shelter for families who lost their homes. <span
+                                style="color:var(--primary);font-weight:600;">Read more</span></p>
+                        <div
+                            style="display:flex;gap:10px;align-items:flex-start;margin:16px 2px 0;color:var(--text-secondary);">
+                            <svg class="ico ico--sm" style="color:var(--primary);margin-top:1px;" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z" />
+                            </svg>
+                            <p class="tiny" style="margin:0;line-height:1.5;">Funds are held in an on-chain escrow and
+                                only released after admin-verified proof.</p>
+                        </div>
+                    </div>
+
+                    <!-- Donations -->
+                    <div class="panel panel-don">
+                        <div style="display:flex;flex-direction:column;gap:2px;">
+                            <div style="display:flex;align-items:center;gap:12px;padding:9px 0;">
+                                <span class="avatar"
+                                    style="width:34px;height:34px;background:linear-gradient(135deg,#9AC4BD,#3E837A);"></span>
+                                <div style="flex:1;"><span class="addr">0x3c44…93bc</span>
+                                    <div class="tiny muted">2 hours ago</div>
+                                </div>
+                                <span style="font-weight:700;color:var(--primary);">$2,000</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;padding:9px 0;">
+                                <span class="avatar"
+                                    style="width:34px;height:34px;background:linear-gradient(135deg,#E7A98E,#C76A45);"></span>
+                                <div style="flex:1;"><span class="addr">0x9965…a4dc</span>
+                                    <div class="tiny muted">5 hours ago</div>
+                                </div>
+                                <span style="font-weight:700;color:var(--primary);">$500</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;padding:9px 0;">
+                                <span class="avatar"
+                                    style="width:34px;height:34px;background:linear-gradient(135deg,#A7C0DC,#42648A);"></span>
+                                <div style="flex:1;"><span class="addr">0x70d2…1f08</span>
+                                    <div class="tiny muted">Yesterday</div>
+                                </div>
+                                <span style="font-weight:700;color:var(--primary);">$250</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--ghost tiny" style="font-weight:700;margin-top:6px;">See all
+                            donations</button>
+                    </div>
+
+                    <!-- Proofs -->
+                    <div class="panel panel-proof">
+                        <div class="card card--flat" style="padding:6px 16px;">
+                            <div style="display:flex;align-items:center;gap:12px;padding:12px 0;">
+                                <span class="icochip icochip--jade"
+                                    style="width:38px;height:38px;border-radius:11px;"><svg class="ico ico--sm"
+                                        viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M7 3h7l4 4v14H7z" />
+                                        <path d="M14 3v4h4" />
+                                    </svg></span>
+                                <div style="flex:1;">
+                                    <div style="font-weight:700;">$500 claimed</div>
+                                    <div class="tiny muted">Submitted Jun 7</div>
+                                </div>
+                                <span class="pill pill--released"><svg class="ico"
+                                        style="width:12px;height:12px;stroke-width:2.8" viewBox="0 0 24 24"
+                                        aria-hidden="true">
+                                        <path d="M5 12l4 4L19 6" />
+                                    </svg>Released</span>
+                            </div>
+                            <hr class="divider" />
+                            <div style="display:flex;align-items:center;gap:12px;padding:12px 0;">
+                                <span class="icochip icochip--jade"
+                                    style="width:38px;height:38px;border-radius:11px;"><svg class="ico ico--sm"
+                                        viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M7 3h7l4 4v14H7z" />
+                                        <path d="M14 3v4h4" />
+                                    </svg></span>
+                                <div style="flex:1;">
+                                    <div style="font-weight:700;">$800 claimed</div>
+                                    <div class="tiny muted">Submitted Jun 9</div>
+                                </div>
+                                <span class="pill pill--pending"><svg class="ico"
+                                        style="width:12px;height:12px;stroke-width:2.2" viewBox="0 0 24 24"
+                                        aria-hidden="true">
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M12 8v4l3 2" />
+                                    </svg>Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sticky donate -->
+        <div class="dock"><button class="btn btn--primary"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" />
+                </svg>Donate</button></div>
+    </div>
+</body>
+
+</html>

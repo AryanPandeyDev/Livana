@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Review</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="statusbar">
+            <span>9:41</span>
+            <span class="statusbar__icons">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect x="4" y="10" width="11" height="4" rx="1" />
+                    <rect x="21" y="10" width="2" height="4" rx="1" />
+                </svg>
+            </span>
+        </div>
+        <div class="appbar">
+            <button class="chip iconbtn" aria-label="Back"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" />
+                </svg></button>
+            <span class="appbar__title">Review</span>
+            <span style="width:42px;"></span>
+        </div>
+        <div class="screen__scroll">
+            <div class="screen__pad" style="padding-bottom:24px;">
+                <!-- summary card -->
+                <div class="card" style="margin-top:6px;">
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span class="cover" style="width:44px;height:44px;border-radius:12px;flex:none;"><img
+                                src="https://picsum.photos/seed/livana-flood/100/100" alt=""
+                                onerror="this.remove()" /></span>
+                        <div style="font-weight:700;font-size:15.5px;">Flood Relief Fund</div>
+                    </div>
+                    <div style="display:flex;align-items:baseline;gap:9px;margin-top:18px;">
+                        <span class="metric" style="font-size:48px;color:var(--text);">$50</span>
+                        <span class="muted" style="font-weight:600;letter-spacing:0.04em;">USDC</span>
+                    </div>
+                    <p class="tiny muted" style="margin:10px 0 0;line-height:1.5;">Held in on-chain escrow until
+                        verified
+                        release.</p>
+                </div>
+
+                <!-- two-step explainer -->
+                <h2 class="sec-title" style="margin:22px 0 12px;"><span class="accent-rule"></span>How it works</h2>
+                <div style="display:flex;flex-direction:column;gap:14px;">
+                    <div style="display:flex;align-items:flex-start;gap:13px;">
+                        <span
+                            style="width:30px;height:30px;border-radius:50%;flex:none;background:var(--primary-container);color:var(--primary);display:flex;align-items:center;justify-content:center;font:700 14px var(--font-sans);">1</span>
+                        <div>
+                            <div style="font-weight:700;">Approve USDC</div>
+                            <div class="tiny muted" style="margin-top:2px;">Allow the pool to receive your USDC.</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:13px;">
+                        <span
+                            style="width:30px;height:30px;border-radius:50%;flex:none;background:var(--primary-container);color:var(--primary);display:flex;align-items:center;justify-content:center;font:700 14px var(--font-sans);">2</span>
+                        <div>
+                            <div style="font-weight:700;">Confirm donation</div>
+                            <div class="tiny muted" style="margin-top:2px;">Send your gift to the escrow.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- fee note -->
+                <div
+                    style="display:flex;gap:10px;align-items:flex-start;margin:20px 2px 0;color:var(--text-secondary);">
+                    <svg class="ico ico--sm" style="color:var(--primary);margin-top:1px;" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 11v5M12 8h.01" />
+                    </svg>
+                    <p class="tiny" style="margin:0;line-height:1.5;">Network fees are paid in your wallet.</p>
+                </div>
+            </div>
+        </div>
+        <div class="dock">
+            <div style="display:flex;justify-content:center;margin-bottom:6px;">
+                <button class="btn btn--ghost" style="color:var(--text-secondary);">Back</button>
+            </div>
+            <button class="btn btn--primary">
+                <svg class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14 4l6 6-9 9H5v-6z" />
+                    <path d="M12 6l6 6" />
+                </svg>Confirm &amp; sign
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

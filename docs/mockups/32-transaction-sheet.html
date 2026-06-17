@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Transaction</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-container);
+            border-top-color: var(--primary);
+            animation: spin .8s linear infinite;
+            flex: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div style="position:absolute;inset:0;background:rgba(8,28,24,0.45);z-index:1;"></div>
+        <div
+            style="position:absolute;left:0;right:0;bottom:0;z-index:2;background:var(--surface);border-radius:28px 28px 0 0;padding:20px;box-shadow:var(--shadow-lg);">
+            <div style="width:40px;height:4px;border-radius:999px;background:var(--border);margin:0 auto 18px;"></div>
+            <h2 style="font-weight:800;font-size:20px;letter-spacing:-0.01em;margin:0;text-align:center;">Processing
+            </h2>
+            <div style="margin-top:24px;display:flex;flex-direction:column;">
+                <!-- step 1 done -->
+                <div style="display:flex;gap:14px;">
+                    <div style="display:flex;flex-direction:column;align-items:center;">
+                        <span
+                            style="width:36px;height:36px;border-radius:50%;flex:none;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;"><svg
+                                class="ico ico--sm" style="stroke-width:2.6" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 12l4 4L19 6" />
+                            </svg></span>
+                        <span style="width:2px;flex:1;min-height:44px;background:var(--primary);margin:4px 0;"></span>
+                    </div>
+                    <div style="flex:1;padding-bottom:8px;">
+                        <div style="font-weight:700;">Approve</div>
+                        <div class="tiny" style="color:var(--primary);font-weight:600;margin-top:2px;">Complete</div>
+                        <div class="card card--flat"
+                            style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-top:10px;border-radius:var(--r-input);">
+                            <span class="tiny muted" style="font-weight:600;">Tx</span>
+                            <span class="addr" style="flex:1;">0x2bf5…a81b</span>
+                            <button style="all:unset;cursor:pointer;color:var(--text-secondary);display:flex;"
+                                aria-label="Copy transaction hash"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <rect x="9" y="9" width="11" height="11" rx="2" />
+                                    <path d="M5 15V5a2 2 0 0 1 2-2h8" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- step 2 active -->
+                <div style="display:flex;gap:14px;">
+                    <div style="display:flex;flex-direction:column;align-items:center;">
+                        <span class="spinner"></span>
+                        <span style="width:2px;flex:1;min-height:36px;background:var(--border);margin:4px 0;"></span>
+                    </div>
+                    <div style="flex:1;padding-top:4px;padding-bottom:12px;">
+                        <div style="font-weight:700;">Confirm</div>
+                        <div class="tiny" style="color:var(--primary);font-weight:600;margin-top:2px;">Confirming
+                            on-chain…</div>
+                    </div>
+                </div>
+                <!-- step 3 pending -->
+                <div style="display:flex;gap:14px;">
+                    <span
+                        style="width:36px;height:36px;border-radius:50%;flex:none;border:2px solid var(--border);background:var(--surface);"></span>
+                    <div style="flex:1;padding-top:7px;">
+                        <div style="font-weight:700;color:var(--text-muted);">Done</div>
+                    </div>
+                </div>
+            </div>
+            <p class="tiny muted" style="margin:18px 0 4px;text-align:center;line-height:1.5;">Keep this screen open
+                while we finish.</p>
+        </div>
+    </div>
+</body>
+
+</html>

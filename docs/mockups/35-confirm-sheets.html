@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Confirm</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div style="position:absolute;inset:0;background:rgba(8,28,24,0.45);z-index:1;"></div>
+        <div
+            style="position:absolute;left:0;right:0;bottom:0;z-index:2;background:var(--surface);border-radius:28px 28px 0 0;padding:20px 20px 22px;box-shadow:var(--shadow-lg);text-align:center;">
+            <div style="width:40px;height:4px;border-radius:999px;background:var(--border);margin:0 auto 20px;"></div>
+            <div
+                style="width:60px;height:60px;border-radius:50%;background:#FBE4E0;color:var(--error);display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                <svg class="ico" style="width:28px;height:28px;" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18.4 5.6a9 9 0 1 0 0 12.8" />
+                    <path d="M3 12h11" />
+                    <path d="M11 8l-4 4 4 4" />
+                </svg>
+            </div>
+            <h2 style="font-weight:800;font-size:20px;letter-spacing:-0.01em;margin:16px 0 0;">Disconnect wallet?</h2>
+            <p class="muted" style="margin:8px auto 0;font-size:14px;line-height:1.55;max-width:32ch;">You can reconnect
+                anytime. Your on-chain history stays linked to your account.</p>
+            <button class="btn"
+                style="background:var(--error);color:#fff;margin-top:22px;box-shadow:0 10px 24px rgba(213,80,63,0.28);">Disconnect</button>
+            <button class="btn btn--ghost"
+                style="width:100%;margin-top:8px;height:46px;color:var(--text-secondary);">Cancel</button>
+        </div>
+    </div>
+</body>
+
+</html>

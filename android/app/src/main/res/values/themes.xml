@@ -1,0 +1,9 @@
+<resources>
+    <!-- Base theme is a thin Material3 shell; the real theming is Compose (LivanaTheme).
+         Status bar is transparent for edge-to-edge; icon contrast is set per-screen in Compose. -->
+    <style name="Theme.Livana" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

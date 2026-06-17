@@ -20,6 +20,9 @@ temp/
 build/
 dist/
 target/
+.gradle/
+**/.gradle/
+**/.kotlin/
 **/target/
 **/build/
 **/dist/

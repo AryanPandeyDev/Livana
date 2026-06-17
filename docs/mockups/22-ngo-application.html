@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Your organization</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .flabel {
+            font: 600 13px var(--font-sans);
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .fhelp {
+            font-size: 12px;
+            color: var(--text-secondary);
+            min-height: 1lh;
+            margin-top: 6px;
+        }
+
+        .field--area {
+            align-items: flex-start;
+            height: auto;
+            min-height: 96px;
+            padding: 12px 14px;
+        }
+
+        .field--area textarea {
+            border: none;
+            background: none;
+            outline: none;
+            resize: none;
+            width: 100%;
+            font: 500 15px var(--font-sans);
+            color: var(--text);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="statusbar">
+            <span>9:41</span>
+            <span class="statusbar__icons">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect x="4" y="10" width="11" height="4" rx="1" />
+                    <rect x="21" y="10" width="2" height="4" rx="1" />
+                </svg>
+            </span>
+        </div>
+        <div class="appbar">
+            <button class="chip iconbtn" aria-label="Back"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" />
+                </svg></button>
+            <span class="appbar__title">Your organization</span>
+            <span style="width:42px;"></span>
+        </div>
+        <div class="screen__scroll">
+            <div class="screen__pad" style="padding-bottom:110px;">
+                <div class="card" style="margin-top:4px;">
+                    <!-- org name -->
+                    <div class="flabel">Organization name</div>
+                    <div class="field">
+                        <input type="text" value="Clean Water Foundation" />
+                    </div>
+                    <div class="fhelp"></div>
+                    <!-- registration number -->
+                    <div class="flabel">Registration number</div>
+                    <div class="field">
+                        <input type="text" value="NGO-2024-12345" />
+                    </div>
+                    <div class="fhelp"></div>
+                    <!-- description -->
+                    <div class="flabel">Description</div>
+                    <div class="field field--area">
+                        <textarea
+                            rows="3">We bring clean, safe drinking water to rural communities through wells, filtration, and local stewardship programs.</textarea>
+                    </div>
+                    <div class="fhelp"></div>
+                    <!-- official email -->
+                    <div class="flabel">Official email</div>
+                    <div class="field">
+                        <input type="email" value="contact@cleanwater.org" />
+                    </div>
+                    <div class="fhelp">You'll verify this in the next step.</div>
+                </div>
+                <!-- uploader -->
+                <div class="flabel" style="margin-top:18px;">Supporting documents (optional)</div>
+                <button
+                    style="width:100%;background:var(--surface);border:1.5px dashed var(--border);border-radius:var(--r-card);padding:22px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;color:var(--text-secondary);font:inherit;">
+                    <span class="icochip icochip--jade" style="width:40px;height:40px;"><svg class="ico ico--sm"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 16V5" />
+                            <path d="M8 9l4-4 4 4" />
+                            <path d="M5 19h14" />
+                        </svg></span>
+                    <span style="font-weight:600;color:var(--text);">Add documents</span>
+                </button>
+                <!-- wallet read-only -->
+                <div class="flabel" style="margin-top:18px;">Wallet to be verified</div>
+                <div class="card card--flat" style="display:flex;align-items:center;gap:11px;padding:14px 16px;">
+                    <span class="icochip"
+                        style="width:36px;height:36px;border-radius:11px;background:var(--surface-alt);color:var(--text-secondary);"><svg
+                            class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="4" y="10" width="16" height="10" rx="2" />
+                            <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                        </svg></span>
+                    <span class="addr" style="flex:1;">0x9965…a4dc</span>
+                </div>
+                <div class="fhelp">Taken from your linked wallet.</div>
+            </div>
+        </div>
+        <div class="dock"><button class="btn btn--primary">Save &amp; continue</button></div>
+    </div>
+</body>
+
+</html>

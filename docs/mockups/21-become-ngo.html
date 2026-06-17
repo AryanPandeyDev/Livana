@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Become an NGO</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .stepnum {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--primary-container);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font: 700 16px var(--font-sans);
+            flex: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="screen__scroll">
+            <!-- hero band -->
+            <div class="cover" style="height:190px;">
+                <img src="https://picsum.photos/seed/livana-ngo-hero/800/500" alt="" onerror="this.remove()" />
+                <div class="statusbar statusbar--light">
+                    <span>9:41</span>
+                    <span class="statusbar__icons">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 19l9-13a14 14 0 0 0-18 0z" opacity=".95" />
+                        </svg>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor"
+                                stroke-width="2" />
+                            <rect x="4" y="10" width="11" height="4" rx="1" />
+                            <rect x="21" y="10" width="2" height="4" rx="1" />
+                        </svg>
+                    </span>
+                </div>
+                <button class="chip iconbtn iconbtn--glass" aria-label="Back"
+                    style="position:absolute;left:16px;top:50px;"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path d="M15 6l-6 6 6 6" />
+                    </svg></button>
+                <h1
+                    style="position:absolute;left:20px;right:20px;bottom:18px;color:#fff;font-family:var(--font-display);font-weight:600;font-size:27px;line-height:1.1;letter-spacing:-0.02em;margin:0;">
+                    Bring your cause<br>on-chain.</h1>
+            </div>
+            <!-- steps -->
+            <div class="screen__pad" style="padding-top:22px;padding-bottom:120px;">
+                <div style="display:flex;align-items:flex-start;gap:14px;">
+                    <span class="stepnum">1</span>
+                    <div style="padding-top:3px;">
+                        <div style="font-weight:700;">Apply</div>
+                        <div class="muted tiny" style="margin-top:2px;">We AI-screen your organization.</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:14px;margin-top:20px;">
+                    <span class="stepnum">2</span>
+                    <div style="padding-top:3px;">
+                        <div style="font-weight:700;">Verification</div>
+                        <div class="muted tiny" style="margin-top:2px;">Admins approve via secure multi-sig.</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:14px;margin-top:20px;">
+                    <span class="stepnum">3</span>
+                    <div style="padding-top:3px;">
+                        <div style="font-weight:700;">Create causes &amp; prove impact</div>
+                        <div class="muted tiny" style="margin-top:2px;">Launch pools and build reputation.</div>
+                    </div>
+                </div>
+                <!-- requirements -->
+                <div class="card card--flat" style="margin-top:26px;background:var(--surface-2);">
+                    <div style="font-weight:700;">What you'll need</div>
+                    <div style="display:flex;align-items:center;gap:11px;margin-top:14px;">
+                        <span class="icochip icochip--jade" style="width:30px;height:30px;border-radius:10px;"><svg
+                                class="ico" style="width:16px;height:16px;stroke-width:2.4" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path d="M5 12l4 4L19 6" />
+                            </svg></span>
+                        <span class="tiny" style="font-weight:600;">A linked wallet</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:11px;margin-top:12px;">
+                        <span class="icochip icochip--jade" style="width:30px;height:30px;border-radius:10px;"><svg
+                                class="ico" style="width:16px;height:16px;stroke-width:2.4" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path d="M5 12l4 4L19 6" />
+                            </svg></span>
+                        <span class="tiny" style="font-weight:600;">Your organization's official email</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:11px;margin-top:12px;">
+                        <span class="icochip icochip--jade" style="width:30px;height:30px;border-radius:10px;"><svg
+                                class="ico" style="width:16px;height:16px;stroke-width:2.4" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path d="M5 12l4 4L19 6" />
+                            </svg></span>
+                        <span class="tiny" style="font-weight:600;">A registration number</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dock"><button class="btn btn--primary">Start application</button></div>
+    </div>
+</body>
+
+</html>

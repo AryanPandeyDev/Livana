@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Submit proof</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="statusbar">
+            <span>9:41</span>
+            <span class="statusbar__icons">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect x="4" y="10" width="11" height="4" rx="1" />
+                    <rect x="21" y="10" width="2" height="4" rx="1" />
+                </svg>
+            </span>
+        </div>
+        <div class="appbar">
+            <button class="chip iconbtn" aria-label="Back"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" />
+                </svg></button>
+            <div style="text-align:center;">
+                <div class="appbar__title">Submit proof</div>
+                <div class="tiny muted" style="margin-top:1px;">Flood Relief Fund</div>
+            </div>
+            <span style="width:42px;"></span>
+        </div>
+        <div class="screen__scroll">
+            <div class="screen__pad" style="padding-bottom:112px;">
+                <!-- proof IPFS CID -->
+                <label
+                    style="display:block;font:600 13px var(--font-sans);color:var(--text-secondary);margin:8px 0 8px;">Proof
+                    IPFS CID</label>
+                <div class="field">
+                    <svg class="ico ico--sm muted" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" />
+                        <path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" />
+                    </svg>
+                    <input type="text" value="QmProofDocs7xK…aF3"
+                        style="font-family:var(--font-mono);font-size:13.5px;letter-spacing:-0.02em;" />
+                </div>
+                <div class="tiny muted" style="margin-top:8px;line-height:1.5;">Paste the IPFS CID of your proof folder
+                    (receipts, invoices, photos). Upload it to IPFS via your Pinata account first — Livana only records
+                    the CID on-chain.</div>
+                <!-- preview link -->
+                <a
+                    style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:var(--primary);font:700 13px var(--font-sans);text-decoration:none;cursor:pointer;">
+                    <svg class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>Preview on IPFS gateway
+                </a>
+                <!-- claimed amount -->
+                <div style="margin-top:22px;">
+                    <label
+                        style="display:block;font:600 13px var(--font-sans);color:var(--text-secondary);margin-bottom:8px;">Claimed
+                        amount</label>
+                    <div class="field">
+                        <input type="text" value="800" />
+                        <span
+                            style="font:700 13px var(--font-sans);color:var(--text-secondary);letter-spacing:0.02em;">USDC</span>
+                    </div>
+                    <div class="tiny muted" style="margin-top:8px;">Pool balance: <strong
+                            style="color:var(--text);">$3,000</strong></div>
+                </div>
+                <!-- info card -->
+                <div class="card card--flat"
+                    style="display:flex;align-items:center;gap:12px;margin-top:20px;padding:14px 16px;">
+                    <span class="icochip icochip--jade" style="width:36px;height:36px;border-radius:11px;"><svg
+                            class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg></span>
+                    <p class="tiny muted" style="margin:0;line-height:1.45;">Funds are released only after admins verify
+                        your proof on-chain.</p>
+                </div>
+            </div>
+        </div>
+        <div class="dock"><button class="btn btn--primary">Submit proof</button></div>
+    </div>
+</body>
+
+</html>

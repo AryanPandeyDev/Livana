@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · NGO profile</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="statusbar">
+            <span>9:41</span>
+            <span class="statusbar__icons">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect x="4" y="10" width="11" height="4" rx="1" />
+                    <rect x="21" y="10" width="2" height="4" rx="1" />
+                </svg>
+            </span>
+        </div>
+        <div class="appbar">
+            <button class="chip iconbtn" aria-label="Back"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" />
+                </svg></button>
+            <div class="appbar__title">NGO profile</div>
+            <button class="chip iconbtn" aria-label="Share"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M12 16V4M8 8l4-4 4 4" />
+                    <path d="M5 14v5h14v-5" />
+                </svg></button>
+        </div>
+        <div class="screen__scroll">
+            <div class="screen__pad" style="padding-top:6px;padding-bottom:28px;">
+                <!-- header card -->
+                <div class="card" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+                    <img class="avatar" style="width:64px;height:64px;"
+                        src="https://picsum.photos/seed/ngo-water/120/120" alt="" onerror="this.remove()" />
+                    <div
+                        style="font-weight:700;font-size:18px;display:flex;align-items:center;gap:7px;margin-top:12px;">
+                        Clean Water Foundation
+                        <svg class="ico" style="width:17px;height:17px;color:var(--primary);stroke-width:2.6"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12l4 4L19 6" />
+                        </svg>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:7px;margin-top:7px;">
+                        <span class="addr">0x12ab…7f9c</span>
+                        <button class="chip iconbtn" style="width:28px;height:28px;border-radius:9px;"
+                            aria-label="Copy address"><svg class="ico"
+                                style="width:14px;height:14px;color:var(--primary)" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <rect x="9" y="9" width="11" height="11" rx="2" />
+                                <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+                            </svg></button>
+                    </div>
+                </div>
+
+                <!-- stat tiles -->
+                <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px;">
+                    <div class="card card--flat" style="padding:15px;text-align:center;">
+                        <div class="metric" style="font-size:23px;">5</div>
+                        <div class="tiny muted" style="margin-top:4px;">SBTs</div>
+                    </div>
+                    <div class="card card--flat" style="padding:15px;text-align:center;">
+                        <div class="metric" style="font-size:23px;color:var(--primary);">$15,000</div>
+                        <div class="tiny muted" style="margin-top:4px;">released</div>
+                    </div>
+                    <div class="card card--flat" style="padding:15px;text-align:center;">
+                        <div class="metric" style="font-size:23px;">3</div>
+                        <div class="tiny muted" style="margin-top:4px;">pools</div>
+                    </div>
+                </div>
+
+                <!-- impact history -->
+                <h2 class="sec-title" style="margin:24px 0 12px;"><span class="accent-rule"></span>Impact history</h2>
+                <div class="card" style="padding:6px 16px;">
+                    <div style="display:flex;align-items:center;gap:12px;padding:13px 0;">
+                        <span class="icochip icochip--gold" style="width:40px;height:40px;border-radius:12px;"><svg
+                                class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="9" r="5" />
+                                <path d="M9 13l-2 8 5-3 5 3-2-8" />
+                            </svg></span>
+                        <div style="flex:1;">
+                            <div style="font-weight:700;color:var(--primary);">$5,000 released</div>
+                            <div class="tiny muted" style="margin-top:2px;">from Flood Relief Fund · Jun 12</div>
+                        </div>
+                        <a class="tiny" style="color:var(--primary);font-weight:700;text-decoration:none;">tx ↗</a>
+                    </div>
+                    <hr class="divider" />
+                    <div style="display:flex;align-items:center;gap:12px;padding:13px 0;">
+                        <span class="icochip icochip--gold" style="width:40px;height:40px;border-radius:12px;"><svg
+                                class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="9" r="5" />
+                                <path d="M9 13l-2 8 5-3 5 3-2-8" />
+                            </svg></span>
+                        <div style="flex:1;">
+                            <div style="font-weight:700;color:var(--primary);">$4,200 released</div>
+                            <div class="tiny muted" style="margin-top:2px;">from Clean Wells Project · May 28</div>
+                        </div>
+                        <a class="tiny" style="color:var(--primary);font-weight:700;text-decoration:none;">tx ↗</a>
+                    </div>
+                    <hr class="divider" />
+                    <div style="display:flex;align-items:center;gap:12px;padding:13px 0;">
+                        <span class="icochip icochip--gold" style="width:40px;height:40px;border-radius:12px;"><svg
+                                class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="9" r="5" />
+                                <path d="M9 13l-2 8 5-3 5 3-2-8" />
+                            </svg></span>
+                        <div style="flex:1;">
+                            <div style="font-weight:700;color:var(--primary);">$3,800 released</div>
+                            <div class="tiny muted" style="margin-top:2px;">from Rural Water Access · May 4</div>
+                        </div>
+                        <a class="tiny" style="color:var(--primary);font-weight:700;text-decoration:none;">tx ↗</a>
+                    </div>
+                </div>
+
+                <!-- their causes -->
+                <h2 class="sec-title" style="margin:24px 0 12px;"><span class="accent-rule"></span>Their causes</h2>
+                <div style="display:flex;gap:14px;overflow:hidden;">
+                    <div class="card card--media" style="width:236px;flex:none;">
+                        <div class="cover" style="height:130px;"><img
+                                src="https://picsum.photos/seed/livana-flood/600/360" alt="" onerror="this.remove()" />
+                            <span style="position:absolute;left:12px;bottom:12px;"><span class="pill pill--region">South
+                                    Asia</span></span>
+                            <span style="position:absolute;left:12px;top:12px;"><span
+                                    class="pill pill--featured">Urgent</span></span>
+                        </div>
+                        <div style="padding:14px;">
+                            <div style="font-weight:700;line-height:1.25;">Flood Relief Fund</div>
+                            <div class="progress" style="margin:12px 0 8px;">
+                                <div class="progress__fill" style="width:50%;"></div>
+                            </div>
+                            <div class="tiny"><strong>$5,000</strong> <span class="muted">of $10,000</span></div>
+                        </div>
+                    </div>
+                    <div class="card card--media" style="width:236px;flex:none;">
+                        <div class="cover cover--edu" style="height:130px;"><img
+                                src="https://picsum.photos/seed/livana-wells/600/360" alt="" onerror="this.remove()" />
+                            <span style="position:absolute;left:12px;bottom:12px;"><span
+                                    class="pill pill--region">Sub-Saharan Africa</span></span>
+                        </div>
+                        <div style="padding:14px;">
+                            <div style="font-weight:700;line-height:1.25;">Clean Wells Project</div>
+                            <div class="progress" style="margin:12px 0 8px;">
+                                <div class="progress__fill" style="width:84%;"></div>
+                            </div>
+                            <div class="tiny"><strong>$8,400</strong> <span class="muted">of $10,000</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SBT caption -->
+                <div
+                    style="display:flex;gap:10px;align-items:flex-start;margin:18px 2px 0;color:var(--text-secondary);">
+                    <svg class="ico ico--sm" style="color:var(--primary);margin-top:1px;" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z" />
+                        <path d="M9 12l2 2 4-4" />
+                    </svg>
+                    <p class="tiny" style="margin:0;line-height:1.5;">SBTs are non-transferable soulbound tokens —
+                        permanent,
+                        on-chain proof of verified aid delivered by this organization.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

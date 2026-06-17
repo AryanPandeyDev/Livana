@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Home</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="statusbar">
+            <span>9:41</span>
+            <span class="statusbar__icons">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect x="4" y="10" width="11" height="4" rx="1" />
+                    <rect x="21" y="10" width="2" height="4" rx="1" />
+                </svg>
+            </span>
+        </div>
+        <div class="appbar">
+            <div class="wordmark"><svg class="petal" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="5.4" r="3.1" fill="var(--primary)" />
+                    <circle cx="12" cy="18.6" r="3.1" fill="var(--primary)" />
+                    <circle cx="5.4" cy="12" r="3.1" fill="var(--primary)" />
+                    <circle cx="18.6" cy="12" r="3.1" fill="var(--primary)" />
+                    <circle cx="12" cy="12" r="2.7" fill="var(--secondary)" />
+                </svg>Livana</div>
+            <button class="chip" aria-label="Sign in">Sign in</button>
+        </div>
+        <div class="screen__scroll">
+            <div class="screen__pad" style="padding-bottom:96px;">
+                <!-- hero impact -->
+                <div class="card"
+                    style="background:var(--grad-hero);box-shadow:var(--shadow-jade);overflow:hidden;margin-top:4px;">
+                    <svg class="blossom-wm" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2c2.5 3 6 4.2 6 8a6 6 0 0 1-12 0c0-3.8 3.5-5 6-8z" fill="#fff" />
+                    </svg>
+                    <div style="position:relative;color:#fff;">
+                        <div class="tiny" style="font-weight:600;color:rgba(255,255,255,0.82);">Total donated on Livana
+                        </div>
+                        <div class="metric" style="font-size:48px;margin-top:6px;">$50,000</div>
+                        <div style="display:flex;align-items:center;gap:9px;margin-top:10px;">
+                            <span style="font-weight:600;color:rgba(255,255,255,0.92);">$20,000 released to
+                                causes</span>
+                            <span class="pill" style="background:rgba(255,255,255,0.2);color:#fff;"><svg class="ico"
+                                    style="width:13px;height:13px;stroke-width:2.6" viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path d="M5 12l5 5L20 7" />
+                                </svg>verifiable</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- stat tiles -->
+                <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px;">
+                    <div class="card card--flat" style="padding:15px;">
+                        <span class="icochip icochip--jade" style="width:38px;height:38px;border-radius:12px;"><svg
+                                class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M3 7h18v12H3z" />
+                                <path d="M3 11h18" />
+                            </svg></span>
+                        <div class="metric" style="font-size:23px;margin-top:10px;">38</div>
+                        <div class="tiny muted">Active pools</div>
+                    </div>
+                    <div class="card card--flat" style="padding:15px;">
+                        <span class="icochip icochip--coral" style="width:38px;height:38px;border-radius:12px;"><svg
+                                class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z" />
+                                <path d="M9 12l2 2 4-4" />
+                            </svg></span>
+                        <div class="metric" style="font-size:23px;margin-top:10px;">12</div>
+                        <div class="tiny muted">Verified NGOs</div>
+                    </div>
+                    <div class="card card--flat" style="padding:15px;">
+                        <span class="icochip icochip--info" style="width:38px;height:38px;border-radius:12px;"><svg
+                                class="ico ico--sm" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M12 7v5l3 3" />
+                            </svg></span>
+                        <div class="metric" style="font-size:23px;margin-top:10px;">42</div>
+                        <div class="tiny muted">Total pools</div>
+                    </div>
+                </div>
+                <!-- featured -->
+                <div style="display:flex;align-items:center;justify-content:space-between;margin:24px 0 12px;">
+                    <h2 class="sec-title"><span class="accent-rule"></span>Featured causes</h2>
+                    <button class="btn btn--ghost tiny" style="font-weight:700;">See all</button>
+                </div>
+                <div style="display:flex;gap:14px;overflow:hidden;">
+                    <div class="card card--media" style="width:236px;flex:none;">
+                        <div class="cover" style="height:130px;"><img
+                                src="https://picsum.photos/seed/livana-flood/500/300" alt="" onerror="this.remove()" />
+                            <span style="position:absolute;left:12px;bottom:12px;"><span class="pill pill--region">South
+                                    Asia</span></span>
+                            <span style="position:absolute;left:12px;top:12px;"><span
+                                    class="pill pill--featured">Urgent</span></span>
+                        </div>
+                        <div style="padding:14px;">
+                            <div style="font-weight:700;line-height:1.25;">Flood Relief Fund</div>
+                            <div class="progress" style="margin:12px 0 8px;">
+                                <div class="progress__fill" style="width:50%;"></div>
+                            </div>
+                            <div class="tiny"><strong>$5,000</strong> <span class="muted">of $10,000</span></div>
+                        </div>
+                    </div>
+                    <div class="card card--media" style="width:236px;flex:none;">
+                        <div class="cover cover--edu" style="height:130px;"><img
+                                src="https://picsum.photos/seed/livana-school/500/300" alt="" onerror="this.remove()" />
+                            <span style="position:absolute;left:12px;bottom:12px;"><span
+                                    class="pill pill--region">Sub-Saharan Africa</span></span>
+                        </div>
+                        <div style="padding:14px;">
+                            <div style="font-weight:700;line-height:1.25;">Classrooms for Kids</div>
+                            <div class="progress" style="margin:12px 0 8px;">
+                                <div class="progress__fill" style="width:72%;"></div>
+                            </div>
+                            <div class="tiny"><strong>$7,200</strong> <span class="muted">of $10,000</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- top NGOs -->
+                <h2 class="sec-title" style="margin:24px 0 12px;"><span class="accent-rule"></span>Top NGOs</h2>
+                <div class="card" style="padding:6px 16px;">
+                    <div style="display:flex;align-items:center;gap:12px;padding:13px 0;">
+                        <img class="avatar" style="width:42px;height:42px;"
+                            src="https://picsum.photos/seed/ngo-water/80/80" alt="" onerror="this.remove()" />
+                        <div style="flex:1;">
+                            <div style="font-weight:700;display:flex;align-items:center;gap:6px;">Clean Water Foundation
+                                <svg class="ico" style="width:15px;height:15px;color:var(--primary);stroke-width:2.6"
+                                    viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12l4 4L19 6" />
+                                </svg>
+                            </div>
+                            <div class="tiny muted">5 SBTs · $15,000 released</div>
+                        </div>
+                        <span style="font:700 13px var(--font-sans);color:var(--gold);">#1</span>
+                    </div>
+                    <hr class="divider" />
+                    <div style="display:flex;align-items:center;gap:12px;padding:13px 0;">
+                        <img class="avatar" style="width:42px;height:42px;"
+                            src="https://picsum.photos/seed/ngo-shelter/80/80" alt="" onerror="this.remove()" />
+                        <div style="flex:1;">
+                            <div style="font-weight:700;display:flex;align-items:center;gap:6px;">Shelter Now <svg
+                                    class="ico" style="width:15px;height:15px;color:var(--primary);stroke-width:2.6"
+                                    viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12l4 4L19 6" />
+                                </svg></div>
+                            <div class="tiny muted">3 SBTs · $8,400 released</div>
+                        </div>
+                        <span style="font:700 13px var(--font-sans);color:var(--text-muted);">#2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- bottom nav -->
+        <nav class="bottomnav">
+            <button class="navitem navitem--on"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 11l8-7 8 7" />
+                    <path d="M6 10v9h12v-9" />
+                </svg>Home</button>
+            <button class="navitem"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="M20 20l-3.5-3.5" />
+                </svg>Explore</button>
+            <button class="navitem"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 20V9M12 20V4M19 20v-7" />
+                </svg>Boards</button>
+            <button class="navitem"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" />
+                </svg>Activity</button>
+            <button class="navitem"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21c0-4 3.5-6 8-6s8 2 8 6" />
+                </svg>Profile</button>
+        </nav>
+    </div>
+</body>
+
+</html>

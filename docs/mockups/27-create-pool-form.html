@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livana · Create a cause</title>
+    <link rel="stylesheet" href="livana.css" />
+    <style>
+        body {
+            background: #ECE8E1;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="statusbar">
+            <span>9:41</span>
+            <span class="statusbar__icons">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 17h3v3H2zM7 13h3v7H7zM12 9h3v11h-3zM17 5h3v15h-3z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 19l9-13a14 14 0 0 0-18 0z" />
+                </svg>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="8" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect x="4" y="10" width="11" height="4" rx="1" />
+                    <rect x="21" y="10" width="2" height="4" rx="1" />
+                </svg>
+            </span>
+        </div>
+        <div class="appbar">
+            <button class="chip iconbtn" aria-label="Back"><svg class="ico ico--sm" viewBox="0 0 24 24"
+                    aria-hidden="true">
+                    <path d="M15 6l-6 6 6 6" />
+                </svg></button>
+            <span class="appbar__title">Create a cause</span>
+            <span style="width:42px;"></span>
+        </div>
+        <div class="screen__scroll">
+            <div class="screen__pad" style="padding-bottom:112px;">
+                <!-- cover picker -->
+                <button
+                    style="all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:150px;margin-top:6px;border:1.5px dashed var(--border);border-radius:var(--r-img);background:var(--surface-2);text-align:center;">
+                    <span class="icochip icochip--jade" style="width:44px;height:44px;"><svg class="ico"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="3" y="5" width="18" height="14" rx="3" />
+                            <circle cx="8.5" cy="10" r="1.6" />
+                            <path d="M5 18l5-5 4 4 2-2 3 3" />
+                        </svg></span>
+                    <span style="font-weight:700;color:var(--text);">Add cover photo</span>
+                    <span class="tiny muted">JPEG, PNG or WebP · max 5 MB</span>
+                </button>
+                <!-- title -->
+                <div style="margin-top:22px;">
+                    <label
+                        style="display:block;font:600 13px var(--font-sans);color:var(--text-secondary);margin-bottom:8px;">Title</label>
+                    <div class="field">
+                        <input type="text" placeholder="e.g. Flood Relief Fund" />
+                    </div>
+                </div>
+                <!-- description -->
+                <div style="margin-top:16px;">
+                    <label
+                        style="display:block;font:600 13px var(--font-sans);color:var(--text-secondary);margin-bottom:8px;">Description</label>
+                    <div class="field" style="align-items:flex-start;height:auto;min-height:96px;padding:12px 14px;">
+                        <textarea rows="4" placeholder="Describe who this cause helps and how funds are used…"
+                            style="border:none;background:none;outline:none;resize:none;font:500 15px var(--font-sans);color:var(--text);width:100%;line-height:1.5;"></textarea>
+                    </div>
+                </div>
+                <!-- region select -->
+                <div style="margin-top:16px;">
+                    <label
+                        style="display:block;font:600 13px var(--font-sans);color:var(--text-secondary);margin-bottom:8px;">Region</label>
+                    <button class="field"
+                        style="width:100%;cursor:pointer;justify-content:space-between;background:var(--surface-alt);border:1px solid transparent;">
+                        <span style="font:500 15px var(--font-sans);color:var(--text);">South Asia</span>
+                        <svg class="ico ico--sm muted" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- target amount -->
+                <div style="margin-top:16px;">
+                    <label
+                        style="display:block;font:600 13px var(--font-sans);color:var(--text-secondary);margin-bottom:8px;">Target
+                        amount</label>
+                    <div class="field">
+                        <input type="text" value="10,000" />
+                        <span
+                            style="font:700 13px var(--font-sans);color:var(--text-secondary);letter-spacing:0.02em;">USDC</span>
+                    </div>
+                </div>
+                <!-- note -->
+                <div
+                    style="display:flex;gap:10px;align-items:flex-start;margin:18px 2px 0;color:var(--text-secondary);">
+                    <svg class="ico ico--sm" style="color:var(--info);margin-top:1px;flex:none;" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 11v5" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                    <p class="tiny" style="margin:0;line-height:1.5;">Publishing a cause requires a quick wallet
+                        transaction.</p>
+                </div>
+            </div>
+        </div>
+        <div class="dock"><button class="btn btn--primary">Continue</button></div>
+    </div>
+</body>
+
+</html>

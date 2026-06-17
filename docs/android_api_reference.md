@@ -224,9 +224,11 @@ Request a challenge message to sign.
 **Response** `200 OK`:
 ```json
 {
-  "message": "Sign this message to link your wallet to Livana.\nNonce: a1b2c3d4-e5f6-7890-abcd-ef1234567890\nTimestamp: 2026-06-07T15:30:00Z"
+  "message": "Livana Wallet Verification\n\nSign this message to prove you own this wallet.\nThis signature will not trigger a blockchain transaction.\n\nNonce: x7Hk3pQ9-aB2cD4eF6gH8iJ0kL2mN4oP6qR8sT0uV2"
 }
 ```
+
+The `Nonce` is a base64url-encoded 32-byte random value (not a UUID). The challenge is valid for **5 minutes**, after which `PATCH /me/wallet` returns `CHALLENGE_EXPIRED`. Each challenge is single-use and is consumed on a successful link. Send the `message` field back **verbatim** (including newlines) in Step 3.
 
 #### Step 2: Sign the Message
 
@@ -241,7 +243,7 @@ Submit the signed challenge.
 {
   "walletAddress": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
   "signature": "0x<130_hex_chars>",
-  "message": "Sign this message to link your wallet to Livana.\nNonce: a1b2c3d4..."
+  "message": "Livana Wallet Verification\n\nSign this message to prove you own this wallet.\nThis signature will not trigger a blockchain transaction.\n\nNonce: x7Hk3pQ9..."
 }
 ```
 
@@ -955,6 +957,8 @@ Complete list of all error codes the backend can return:
 | `CLERK_CONFIG_ERROR`          | 500  | Clerk secret key not configured                           |
 | `CLERK_AUTH_ERROR`            | 500  | Clerk API authentication failed                           |
 | `CLERK_USER_NOT_FOUND`        | 500  | User not found in Clerk (server-side)                     |
+| `AI_CONFIG_KEY_MISSING`       | 500  | AI-config encryption key not configured (admin AI-config) |
+| `AI_CONFIG_DECRYPT_ERROR`     | 500  | Failed to encrypt/decrypt the stored Gemini key           |
 | `INTERNAL_ERROR`              | 500  | Unexpected server error                                   |
 | `CLERK_EMAIL_CHECK_FAILED`    | 503  | Clerk API unreachable                                     |
 | `PINATA_UNAUTHORIZED`         | 400  | Pinata rejected the supplied API key                      |
