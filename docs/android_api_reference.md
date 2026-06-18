@@ -357,6 +357,7 @@ Get full pool detail including recent donations, proofs, and creator reputation.
   ],
   "creatorReputation": {
     "ngoAddress": "0x9965507d1a55bcc...",
+    "orgName": "Clean Water Foundation",
     "totalSbts": 5,
     "totalAmountReleased": 15000000000,
     "poolCount": 3
@@ -604,11 +605,14 @@ Get aggregated reputation stats for an NGO.
 ```json
 {
   "ngoAddress": "0x9965507d1a55bcc...",
+  "orgName": "Clean Water Foundation",
   "totalSbts": 5,
   "totalAmountReleased": 15000000000,
   "poolCount": 3
 }
 ```
+
+`orgName` is the verified NGO's public display name (from their approved application). It is `null` when the address is not a verified NGO.
 
 ---
 

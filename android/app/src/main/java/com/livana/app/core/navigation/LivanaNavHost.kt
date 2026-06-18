@@ -29,6 +29,7 @@ import com.livana.app.feature.home.HomeScreen
 import com.livana.app.feature.pooldetail.PoolDetailScreen
 import com.livana.app.feature.pooldetail.PoolDonationsScreen
 import com.livana.app.feature.pooldetail.PoolProofsScreen
+import com.livana.app.feature.reputation.NgoProfileScreen
 
 /** Top-level tab routes used to decide bottom-bar visibility. */
 private val TopLevelRoutes = LivanaTopLevelTabs.map { it.destination.route }.toSet()
@@ -96,7 +97,7 @@ fun LivanaNavHost(
                 PoolDetailScreen(
                     onBack = { navController.popBackStack() },
                     onDonate = { /* TODO: wire Donate once the donate screen exists. */ },
-                    onOpenNgo = { /* TODO: wire NgoProfile once the NGO profile screen exists. */ },
+                    onOpenNgo = { ngoAddress -> navController.navigateToNgoProfile(ngoAddress) },
                     onSeeAllDonations = { navController.navigateToPoolDonations(address) },
                     onSeeAllProofs = { navController.navigateToPoolProofs(address) },
                 )
@@ -121,6 +122,16 @@ fun LivanaNavHost(
                     onBack = { navController.popBackStack() },
                 )
             }
+            composable(
+                route = Destination.NgoProfile.route,
+                arguments = listOf(
+                    navArgument("address") { type = NavType.StringType },
+                ),
+            ) {
+                NgoProfileScreen(
+                    onBack = { navController.popBackStack() },
+                )
+            }
         }
     }
 }
@@ -139,6 +150,10 @@ private fun NavHostController.navigateToPoolDonations(address: String) {
 
 private fun NavHostController.navigateToPoolProofs(address: String) {
     navigate(Destination.PoolProofs.route.replace("{address}", address))
+}
+
+private fun NavHostController.navigateToNgoProfile(address: String) {
+    navigate(Destination.NgoProfile.route.replace("{address}", address))
 }
 
 private fun NavHostController.navigateToTopLevelDestination(destination: Destination) {

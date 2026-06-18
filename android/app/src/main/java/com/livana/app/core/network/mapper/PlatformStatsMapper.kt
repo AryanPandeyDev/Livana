@@ -13,4 +13,3 @@ fun PlatformStatsDto.toDomain(): PlatformStats = PlatformStats(
     verifiedNgosCount = verifiedNgosCount,
 )
 
-internal fun Long.toUsdc(): Usdc = Usdc(BigInteger.valueOf(this))

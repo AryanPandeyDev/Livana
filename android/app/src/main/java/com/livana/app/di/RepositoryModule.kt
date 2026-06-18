@@ -6,6 +6,8 @@ import com.livana.app.core.data.repository.PoolRepository
 import com.livana.app.core.data.repository.PoolRepositoryImpl
 import com.livana.app.core.data.repository.ProofRepository
 import com.livana.app.core.data.repository.ProofRepositoryImpl
+import com.livana.app.core.data.repository.ReputationRepository
+import com.livana.app.core.data.repository.ReputationRepositoryImpl
 import com.livana.app.core.data.repository.StatsRepository
 import com.livana.app.core.data.repository.StatsRepositoryImpl
 import dagger.Binds
@@ -32,5 +34,9 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindProofRepository(impl: ProofRepositoryImpl): ProofRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindReputationRepository(impl: ReputationRepositoryImpl): ReputationRepository
 }
 

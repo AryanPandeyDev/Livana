@@ -26,28 +26,3 @@ data class PoolDetailDto(
     val creatorReputation: NgoReputationDto,
 )
 
-@Serializable
-data class PoolDonationDto(
-    val donorAddress: String,
-    val amount: Long,
-    val txHash: String,
-    val blockTimestamp: String,
-)
-
-@Serializable
-data class ProofDto(
-    val proofId: Int,
-    val ipfsCid: String,
-    val amount: Long,
-    val released: Boolean,
-    val submittedAt: String,
-    val releasedAt: String?,
-)
-
-@Serializable
-data class NgoReputationDto(
-    val ngoAddress: String,
-    val totalSbts: Long,
-    val totalAmountReleased: Long,
-    val poolCount: Long,
-)

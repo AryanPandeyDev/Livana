@@ -1,6 +1,9 @@
 package com.livana.backend.reputation.service;
 
 import com.livana.backend.common.exception.ApiException;
+import com.livana.backend.ngo.entity.ApplicationStatus;
+import com.livana.backend.ngo.entity.NgoApplication;
+import com.livana.backend.ngo.repository.NgoApplicationRepository;
 import com.livana.backend.reputation.dto.NgoLeaderboardEntryDto;
 import com.livana.backend.reputation.dto.NgoReputationDto;
 import com.livana.backend.reputation.dto.SbtMintDto;
@@ -24,20 +27,35 @@ import java.util.stream.IntStream;
 public class ReputationService {
 
     private final SbtMintRepository sbtMintRepository;
+    private final NgoApplicationRepository ngoApplicationRepository;
 
     public NgoReputationDto getReputation(String ngoAddress) {
+        String orgName = resolveOrgName(ngoAddress);
         NgoReputationProjection projection = sbtMintRepository.findReputationByNgoAddress(ngoAddress);
 
         if (projection == null || projection.getTotalSbts() == null) {
-            return new NgoReputationDto(ngoAddress, 0, 0, 0);
+            return new NgoReputationDto(ngoAddress, orgName, 0, 0, 0);
         }
 
         return new NgoReputationDto(
                 ngoAddress,
+                orgName,
                 projection.getTotalSbts(),
                 projection.getTotalAmountReleased(),
                 projection.getPoolCount()
         );
+    }
+
+    /**
+     * Resolve the public display name for a verified NGO by wallet address.
+     * Only approved applications expose a name; returns null for unknown/unverified
+     * addresses so the field degrades gracefully (callers fall back to the address).
+     */
+    private String resolveOrgName(String ngoAddress) {
+        return ngoApplicationRepository
+                .findByWalletAddressAndStatus(ngoAddress, ApplicationStatus.APPROVED)
+                .map(NgoApplication::getOrgName)
+                .orElse(null);
     }
 
     /**

@@ -32,14 +32,18 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.livana.app.core.common.toRelativeTime
+import com.livana.app.core.designsystem.component.DividerLine
 import com.livana.app.core.designsystem.component.AddressAvatar
 import com.livana.app.core.designsystem.component.AddressText
+import com.livana.app.core.designsystem.component.BackChevronIcon
 import com.livana.app.core.designsystem.component.IconButtonLivana
+import com.livana.app.core.designsystem.component.LivanaCard
 import com.livana.app.core.designsystem.component.truncateAddress
 import com.livana.app.core.designsystem.theme.Borders
 import com.livana.app.core.designsystem.theme.ComponentDimens
@@ -145,7 +149,7 @@ private fun DonationsAppBar(
             onClick = onBack,
             contentDescription = "Back",
         ) {
-            BackChevron()
+            BackChevronIcon()
         }
         Column(
             modifier = Modifier.weight(1f),
@@ -167,15 +171,7 @@ private fun DonationsAppBar(
     }
 }
 
-@Composable
-private fun BackChevron() {
-    val color = LivanaColors.Text
-    androidx.compose.foundation.Canvas(modifier = Modifier.size(ComponentDimens.SmallIconSize)) {
-        val sw = size.minDimension * 0.1f
-        drawLine(color, androidx.compose.ui.geometry.Offset(size.width * 0.68f, size.height * 0.18f), androidx.compose.ui.geometry.Offset(size.width * 0.32f, size.height * 0.5f), sw, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-        drawLine(color, androidx.compose.ui.geometry.Offset(size.width * 0.32f, size.height * 0.5f), androidx.compose.ui.geometry.Offset(size.width * 0.68f, size.height * 0.82f), sw, cap = androidx.compose.ui.graphics.StrokeCap.Round)
-    }
-}
+
 
 // ---------------------------------------------------------------------------
 // Content list with infinite scroll
@@ -320,15 +316,7 @@ private fun LoadingMoreIndicator() {
     }
 }
 
-@Composable
-private fun DividerLine() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Borders.Hairline)
-            .background(LivanaColors.Hairline),
-    )
-}
+
 
 @Composable
 private fun DonationsStateContainer(content: @Composable () -> Unit) {

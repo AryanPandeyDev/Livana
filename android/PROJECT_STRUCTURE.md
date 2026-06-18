@@ -103,6 +103,12 @@ feature-only use-cases. Sub-flows (e.g. donate's 4 steps) are multiple screens i
 - **Config-driven environment**: all chain/backend values come from `BuildConfig` (see
   `app/build.gradle.kts`). Anvil now; testnet/mainnet are config-only swaps.
 
+## UI & Feature Refactor Conventions
+
+- **A single composable file shouldn't exceed 400 lines** (if it does, components MUST be extracted into `feature/xyz/components/`).
+- **Common icons built with Canvas** must live in `core/designsystem/component/Icons.kt` and not be duplicated.
+- **Keep core domain files and network DTOs restricted to ONE public type per file.**
+
 ## Status of this skeleton
 
 Built (concrete): build config + manifest + theme (Color/Type/Shape/Dimens/Theme) + BrandMark +

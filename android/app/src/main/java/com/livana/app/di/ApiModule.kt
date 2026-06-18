@@ -3,6 +3,7 @@ package com.livana.app.di
 import com.livana.app.core.network.DonationApi
 import com.livana.app.core.network.PoolApi
 import com.livana.app.core.network.ProofApi
+import com.livana.app.core.network.ReputationApi
 import com.livana.app.core.network.StatsApi
 import dagger.Module
 import dagger.Provides
@@ -29,5 +30,9 @@ object ApiModule {
     @Provides
     @Singleton
     fun provideProofApi(retrofit: Retrofit): ProofApi = retrofit.create(ProofApi::class.java)
+
+    @Provides
+    @Singleton
+    fun providesReputationApi(retrofit: Retrofit): ReputationApi = retrofit.create(ReputationApi::class.java)
 }
 

@@ -39,12 +39,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.livana.app.core.common.toShortDate
+import com.livana.app.core.designsystem.component.DividerLine
+import com.livana.app.core.designsystem.component.BackChevronIcon
+import com.livana.app.core.designsystem.component.DocumentIcon
 import com.livana.app.core.designsystem.component.IconButtonLivana
 import com.livana.app.core.designsystem.component.IconChip
 import com.livana.app.core.designsystem.component.IconChipTint
 import com.livana.app.core.designsystem.component.LivanaCard
 import com.livana.app.core.designsystem.component.StatusPill
 import com.livana.app.core.designsystem.component.StatusPillKind
+import com.livana.app.core.designsystem.component.ShieldIcon
 import com.livana.app.core.designsystem.component.truncateAddress
 import com.livana.app.core.designsystem.theme.Borders
 import com.livana.app.core.designsystem.theme.ComponentDimens
@@ -149,7 +153,7 @@ private fun ProofsAppBar(
             onClick = onBack,
             contentDescription = "Back",
         ) {
-            BackChevron()
+            BackChevronIcon()
         }
         Column(
             modifier = Modifier.weight(1f),
@@ -171,15 +175,7 @@ private fun ProofsAppBar(
     }
 }
 
-@Composable
-private fun BackChevron() {
-    val color = LivanaColors.Text
-    Canvas(modifier = Modifier.size(ComponentDimens.SmallIconSize)) {
-        val sw = size.minDimension * 0.1f
-        drawLine(color, androidx.compose.ui.geometry.Offset(size.width * 0.68f, size.height * 0.18f), androidx.compose.ui.geometry.Offset(size.width * 0.32f, size.height * 0.5f), sw, cap = StrokeCap.Round)
-        drawLine(color, androidx.compose.ui.geometry.Offset(size.width * 0.32f, size.height * 0.5f), androidx.compose.ui.geometry.Offset(size.width * 0.68f, size.height * 0.82f), sw, cap = StrokeCap.Round)
-    }
-}
+
 
 // ---------------------------------------------------------------------------
 // Content list with infinite scroll
@@ -262,7 +258,7 @@ private fun ProofFullRow(proof: Proof) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         IconChip(tint = IconChipTint.Jade) {
-            DocumentIcon(color = LocalContentColor.current)
+            DocumentIcon(tint = LocalContentColor.current)
         }
         Column(modifier = Modifier.weight(1f)) {
             Text(
@@ -296,7 +292,7 @@ private fun TrustFootnote(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.Top,
     ) {
         ShieldIcon(
-            color = LivanaColors.Primary,
+            tint = LivanaColors.Primary,
             modifier = Modifier
                 .size(ComponentDimens.SmallIconSize)
                 .padding(top = 1.dp),
@@ -309,72 +305,7 @@ private fun TrustFootnote(modifier: Modifier = Modifier) {
     }
 }
 
-// ---------------------------------------------------------------------------
-// Canvas icons
-// ---------------------------------------------------------------------------
 
-@Composable
-private fun DocumentIcon(
-    color: Color,
-    modifier: Modifier = Modifier,
-) {
-    Canvas(modifier = modifier.size(ComponentDimens.SmallIconSize)) {
-        val stroke = Stroke(
-            width = size.minDimension * IconStrokeRatio,
-            cap = StrokeCap.Round,
-            join = StrokeJoin.Round,
-        )
-        val path = Path().apply {
-            moveTo(size.width * 0.28f, size.height * 0.1f)
-            lineTo(size.width * 0.62f, size.height * 0.1f)
-            lineTo(size.width * 0.8f, size.height * 0.28f)
-            lineTo(size.width * 0.8f, size.height * 0.9f)
-            lineTo(size.width * 0.28f, size.height * 0.9f)
-            close()
-            moveTo(size.width * 0.62f, size.height * 0.1f)
-            lineTo(size.width * 0.62f, size.height * 0.28f)
-            lineTo(size.width * 0.8f, size.height * 0.28f)
-        }
-        drawPath(path, color, style = stroke)
-        // Content lines inside the document.
-        drawLine(color, androidx.compose.ui.geometry.Offset(size.width * 0.38f, size.height * 0.52f), androidx.compose.ui.geometry.Offset(size.width * 0.66f, size.height * 0.52f), stroke.width, cap = StrokeCap.Round)
-        drawLine(color, androidx.compose.ui.geometry.Offset(size.width * 0.38f, size.height * 0.7f), androidx.compose.ui.geometry.Offset(size.width * 0.56f, size.height * 0.7f), stroke.width, cap = StrokeCap.Round)
-    }
-}
-
-@Composable
-private fun ShieldIcon(
-    color: Color,
-    modifier: Modifier = Modifier,
-) {
-    Canvas(modifier = modifier) {
-        val stroke = Stroke(
-            width = size.minDimension * IconStrokeRatio,
-            cap = StrokeCap.Round,
-            join = StrokeJoin.Round,
-        )
-        val path = Path().apply {
-            // Shield outline matching mockup: M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z
-            // Normalized to our canvas.
-            moveTo(size.width * 0.5f, size.height * 0.08f)
-            lineTo(size.width * 0.85f, size.height * 0.22f)
-            lineTo(size.width * 0.85f, size.height * 0.44f)
-            cubicTo(
-                size.width * 0.85f, size.height * 0.7f,
-                size.width * 0.7f, size.height * 0.82f,
-                size.width * 0.5f, size.height * 0.92f,
-            )
-            cubicTo(
-                size.width * 0.3f, size.height * 0.82f,
-                size.width * 0.15f, size.height * 0.7f,
-                size.width * 0.15f, size.height * 0.44f,
-            )
-            lineTo(size.width * 0.15f, size.height * 0.22f)
-            close()
-        }
-        drawPath(path, color, style = stroke)
-    }
-}
 
 // ---------------------------------------------------------------------------
 // Loading / state helpers
@@ -429,15 +360,7 @@ private fun LoadingMoreIndicator() {
     }
 }
 
-@Composable
-private fun DividerLine() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Borders.Hairline)
-            .background(LivanaColors.Hairline),
-    )
-}
+
 
 @Composable
 private fun ProofsStateContainer(content: @Composable () -> Unit) {
@@ -456,7 +379,6 @@ private fun ProofsStateContainer(content: @Composable () -> Unit) {
 // ---------------------------------------------------------------------------
 
 private val ProofRowVerticalPadding = 14.dp
-private const val IconStrokeRatio = 0.1f
 
 // ---------------------------------------------------------------------------
 // Previews
