@@ -1,8 +1,8 @@
 package com.livana.app.di
 
 import com.livana.app.BuildConfig
+import com.livana.app.core.auth.ClerkTokenProvider
 import com.livana.app.core.network.AuthInterceptor
-import com.livana.app.core.network.NoOpTokenProvider
 import com.livana.app.core.network.TokenProvider
 import dagger.Module
 import dagger.Provides
@@ -28,7 +28,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTokenProvider(): TokenProvider = NoOpTokenProvider
+    fun provideTokenProvider(tokenProvider: ClerkTokenProvider): TokenProvider = tokenProvider
 
     @Provides
     @Singleton

@@ -651,6 +651,7 @@ Top NGOs ranked by reputation.
 [
   {
     "ngoAddress": "0x9965507d1a55bcc...",
+    "orgName": "Clean Water Foundation",
     "totalSbts": 5,
     "totalAmountReleased": 15000000000,
     "poolCount": 3,

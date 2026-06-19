@@ -1,6 +1,7 @@
 package com.livana.app.core.data.repository
 
 import com.livana.app.core.common.LivanaResult
+import com.livana.app.core.model.DonorLeaderboardEntry
 import com.livana.app.core.model.PagedResult
 import com.livana.app.core.model.PoolDonation
 import com.livana.app.core.network.DonationApi
@@ -21,6 +22,15 @@ class DonationRepositoryImpl @Inject constructor(
             page = page,
             size = size,
         ).toLivanaResult { it.toDomain() }
+    } catch (throwable: Throwable) {
+        LivanaResult.Failure(throwable.toDomainError())
+    }
+
+    override suspend fun getDonorLeaderboard(
+        limit: Int?,
+    ): LivanaResult<List<DonorLeaderboardEntry>> = try {
+        donationApi.getLeaderboard(limit = limit)
+            .toLivanaResult { entries -> entries.map { it.toDomain() } }
     } catch (throwable: Throwable) {
         LivanaResult.Failure(throwable.toDomainError())
     }

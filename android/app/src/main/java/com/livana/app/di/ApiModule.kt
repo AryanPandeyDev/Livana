@@ -5,6 +5,7 @@ import com.livana.app.core.network.PoolApi
 import com.livana.app.core.network.ProofApi
 import com.livana.app.core.network.ReputationApi
 import com.livana.app.core.network.StatsApi
+import com.livana.app.core.network.UserApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,5 +35,9 @@ object ApiModule {
     @Provides
     @Singleton
     fun providesReputationApi(retrofit: Retrofit): ReputationApi = retrofit.create(ReputationApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 }
 

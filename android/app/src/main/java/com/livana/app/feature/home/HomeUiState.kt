@@ -1,5 +1,6 @@
 package com.livana.app.feature.home
 
+import com.livana.app.core.model.NgoLeaderboardEntry
 import com.livana.app.core.model.PoolSummary
 import com.livana.app.core.model.Usdc
 
@@ -15,5 +16,6 @@ sealed interface HomeUiState {
         val verifiedNgos: Long,
         val totalPools: Long,
         val featuredPools: List<PoolSummary>,
+        val topNgos: List<NgoLeaderboardEntry>,
     ) : HomeUiState
 }

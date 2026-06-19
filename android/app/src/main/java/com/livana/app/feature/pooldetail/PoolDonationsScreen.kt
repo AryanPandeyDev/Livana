@@ -56,6 +56,8 @@ import com.livana.app.core.ui.EmptyState
 import com.livana.app.core.ui.ErrorState
 import com.livana.app.core.ui.ListRowSkeleton
 import com.livana.app.core.ui.OfflineState
+import com.livana.app.feature.pooldetail.state.PoolDonationsUiState
+import com.livana.app.feature.pooldetail.viewmodel.PoolDonationsViewModel
 import java.math.BigInteger
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter

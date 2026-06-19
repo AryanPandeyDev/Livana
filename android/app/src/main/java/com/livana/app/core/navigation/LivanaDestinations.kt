@@ -23,6 +23,8 @@ sealed interface Destination {
     data object Donate : Destination { override val route = "donate/{address}" }
     data object NgoProfile : Destination { override val route = "ngo/{address}" }
     data object Settings : Destination { override val route = "settings" }
+    data object SignIn : Destination { override val route = "sign-in" }
+    data object LinkWallet : Destination { override val route = "wallet/link" }
     data object BecomeNgo : Destination { override val route = "ngo/apply" }
     data object CreatePool : Destination { override val route = "ngo/pool/create" }
     data object SubmitProof : Destination { override val route = "ngo/pool/{address}/proof" }

@@ -1,5 +1,6 @@
 package com.livana.app.core.network
 
+import com.livana.app.core.network.dto.NgoLeaderboardEntryDto
 import com.livana.app.core.network.dto.NgoReputationDto
 import com.livana.app.core.network.dto.SbtMintDto
 import retrofit2.Response
@@ -23,4 +24,10 @@ interface ReputationApi {
         @Query("size")
         size: Int? = null
     ): Response<Page<SbtMintDto>>
+
+    @GET("api/v1/reputation/leaderboard")
+    suspend fun getLeaderboard(
+        @Query("limit")
+        limit: Int? = null
+    ): Response<List<NgoLeaderboardEntryDto>>
 }

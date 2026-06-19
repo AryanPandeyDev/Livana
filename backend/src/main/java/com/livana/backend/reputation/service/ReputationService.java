@@ -84,6 +84,7 @@ public class ReputationService {
         return IntStream.range(0, projections.size())
                 .mapToObj(i -> new NgoLeaderboardEntryDto(
                         projections.get(i).getNgoAddress(),
+                        resolveOrgName(projections.get(i).getNgoAddress()),
                         projections.get(i).getTotalSbts(),
                         projections.get(i).getTotalAmountReleased(),
                         projections.get(i).getPoolCount(),

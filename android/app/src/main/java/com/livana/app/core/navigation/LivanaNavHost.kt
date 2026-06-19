@@ -24,12 +24,16 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.livana.app.core.designsystem.theme.LivanaColors
 import com.livana.app.core.designsystem.theme.LivanaTheme
+import com.livana.app.feature.auth.SignInScreen
 import com.livana.app.feature.explore.ExploreScreen
 import com.livana.app.feature.home.HomeScreen
+import com.livana.app.feature.leaderboard.BoardsScreen
 import com.livana.app.feature.pooldetail.PoolDetailScreen
 import com.livana.app.feature.pooldetail.PoolDonationsScreen
 import com.livana.app.feature.pooldetail.PoolProofsScreen
+import com.livana.app.feature.profile.ProfileScreen
 import com.livana.app.feature.reputation.NgoProfileScreen
+import com.livana.app.feature.wallet.LinkWalletScreen
 
 /** Top-level tab routes used to decide bottom-bar visibility. */
 private val TopLevelRoutes = LivanaTopLevelTabs.map { it.destination.route }.toSet()
@@ -77,6 +81,9 @@ fun LivanaNavHost(
             composable(Destination.Home.route) {
                 HomeScreen(
                     onOpenPool = { address -> navController.navigateToPoolDetail(address) },
+                    onOpenNgo = { ngoAddress -> navController.navigateToNgoProfile(ngoAddress) },
+                    onSeeAllNgos = { navController.navigateToTopLevelDestination(Destination.Boards) },
+                    onSignIn = { navController.navigateToSignIn() },
                 )
             }
             composable(Destination.Explore.route) {
@@ -84,9 +91,18 @@ fun LivanaNavHost(
                     onOpenPool = { address -> navController.navigateToPoolDetail(address) },
                 )
             }
-            composable(Destination.Boards.route) { LivanaTabPlaceholder("Boards") }
+            composable(Destination.Boards.route) {
+                BoardsScreen(
+                    onOpenNgo = { ngoAddress -> navController.navigateToNgoProfile(ngoAddress) },
+                )
+            }
             composable(Destination.Activity.route) { LivanaTabPlaceholder("Activity") }
-            composable(Destination.Profile.route) { LivanaTabPlaceholder("Profile") }
+            composable(Destination.Profile.route) {
+                ProfileScreen(
+                    onSignIn = { navController.navigateToSignIn() },
+                    onLinkWallet = { navController.navigateToLinkWallet() },
+                )
+            }
             composable(
                 route = Destination.PoolDetail.route,
                 arguments = listOf(
@@ -132,6 +148,18 @@ fun LivanaNavHost(
                     onBack = { navController.popBackStack() },
                 )
             }
+            composable(Destination.SignIn.route) {
+                SignInScreen(
+                    onBack = { navController.popBackStack() },
+                    onSignedIn = { navController.popBackStack() },
+                )
+            }
+            composable(Destination.LinkWallet.route) {
+                LinkWalletScreen(
+                    onBack = { navController.popBackStack() },
+                    onLinked = { navController.popBackStack() },
+                )
+            }
         }
     }
 }
@@ -154,6 +182,14 @@ private fun NavHostController.navigateToPoolProofs(address: String) {
 
 private fun NavHostController.navigateToNgoProfile(address: String) {
     navigate(Destination.NgoProfile.route.replace("{address}", address))
+}
+
+private fun NavHostController.navigateToSignIn() {
+    navigate(Destination.SignIn.route)
+}
+
+private fun NavHostController.navigateToLinkWallet() {
+    navigate(Destination.LinkWallet.route)
 }
 
 private fun NavHostController.navigateToTopLevelDestination(destination: Destination) {

@@ -10,6 +10,8 @@ import com.livana.app.core.data.repository.ReputationRepository
 import com.livana.app.core.data.repository.ReputationRepositoryImpl
 import com.livana.app.core.data.repository.StatsRepository
 import com.livana.app.core.data.repository.StatsRepositoryImpl
+import com.livana.app.core.data.repository.UserRepository
+import com.livana.app.core.data.repository.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -38,5 +40,9 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindReputationRepository(impl: ReputationRepositoryImpl): ReputationRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }
 

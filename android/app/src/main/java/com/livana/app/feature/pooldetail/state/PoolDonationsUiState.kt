@@ -1,4 +1,4 @@
-package com.livana.app.feature.pooldetail
+package com.livana.app.feature.pooldetail.state
 
 import com.livana.app.core.model.PoolDonation
 

@@ -1,30 +1,31 @@
-package com.livana.app.feature.pooldetail
+package com.livana.app.feature.pooldetail.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.livana.app.core.common.DomainError
 import com.livana.app.core.common.LivanaResult
-import com.livana.app.core.data.repository.DonationRepository
+import com.livana.app.core.data.repository.ProofRepository
+import com.livana.app.feature.pooldetail.state.PoolProofsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class PoolDonationsViewModel @Inject constructor(
+class PoolProofsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val donationRepository: DonationRepository,
+    private val proofRepository: ProofRepository,
 ) : ViewModel() {
 
     /** The pool's on-chain address, read from the navigation argument. */
     val address: String = checkNotNull(savedStateHandle.get<String>("address"))
 
-    private val _state = MutableStateFlow<PoolDonationsUiState>(PoolDonationsUiState.Loading)
-    val state: StateFlow<PoolDonationsUiState> = _state.asStateFlow()
+    private val _state = MutableStateFlow<PoolProofsUiState>(PoolProofsUiState.Loading)
+    val state: StateFlow<PoolProofsUiState> = _state.asStateFlow()
 
     private var loadJob: Job? = null
     private var nextPageJob: Job? = null
@@ -39,12 +40,12 @@ class PoolDonationsViewModel @Inject constructor(
     }
 
     fun loadNextPage() {
-        val currentState = _state.value as? PoolDonationsUiState.Content ?: return
+        val currentState = _state.value as? PoolProofsUiState.Content ?: return
         if (currentState.isLoadingMore || currentState.endReached) return
 
         nextPageJob = viewModelScope.launch {
             _state.value = currentState.copy(isLoadingMore = true)
-            when (val result = donationRepository.getPoolDonations(
+            when (val result = proofRepository.getPoolProofs(
                 address = address,
                 page = nextPage,
                 size = PageSize,
@@ -53,7 +54,7 @@ class PoolDonationsViewModel @Inject constructor(
                     val page = result.value
                     nextPage = page.number + 1
                     _state.value = currentState.copy(
-                        donations = currentState.donations + page.content,
+                        proofs = currentState.proofs + page.content,
                         isLoadingMore = false,
                         endReached = page.last,
                     )
@@ -71,9 +72,9 @@ class PoolDonationsViewModel @Inject constructor(
         nextPageJob?.cancel()
         loadJob = viewModelScope.launch {
             nextPage = FirstPage
-            _state.value = PoolDonationsUiState.Loading
+            _state.value = PoolProofsUiState.Loading
 
-            when (val result = donationRepository.getPoolDonations(
+            when (val result = proofRepository.getPoolProofs(
                 address = address,
                 page = FirstPage,
                 size = PageSize,
@@ -82,10 +83,10 @@ class PoolDonationsViewModel @Inject constructor(
                     val page = result.value
                     nextPage = page.number + 1
                     _state.value = if (page.content.isEmpty()) {
-                        PoolDonationsUiState.Empty
+                        PoolProofsUiState.Empty
                     } else {
-                        PoolDonationsUiState.Content(
-                            donations = page.content,
+                        PoolProofsUiState.Content(
+                            proofs = page.content,
                             isLoadingMore = false,
                             endReached = page.last,
                         )
@@ -94,9 +95,9 @@ class PoolDonationsViewModel @Inject constructor(
 
                 is LivanaResult.Failure -> {
                     _state.value = if (result.error is DomainError.Network) {
-                        PoolDonationsUiState.Offline
+                        PoolProofsUiState.Offline
                     } else {
-                        PoolDonationsUiState.Error(message = result.error.message)
+                        PoolProofsUiState.Error(message = result.error.message)
                     }
                 }
             }

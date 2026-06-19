@@ -4,6 +4,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Lets AppKit detect installed wallets and deep-link out to them (WalletConnect mobile linking). -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="wc" />
+        </intent>
+        <package android:name="io.metamask" />
+    </queries>
+
     <application
         android:name=".LivanaApplication"
         android:allowBackup="true"
@@ -21,6 +30,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Redirect target so wallets can return to Livana after approval/signing. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="livana-wc" android:host="request" />
             </intent-filter>
         </activity>
     </application>

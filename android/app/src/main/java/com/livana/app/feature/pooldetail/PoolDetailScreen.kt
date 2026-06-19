@@ -105,6 +105,8 @@ import com.livana.app.core.ui.DetailScreenSkeleton
 import com.livana.app.core.ui.EmptyState
 import com.livana.app.core.ui.ErrorState
 import com.livana.app.core.ui.OfflineState
+import com.livana.app.feature.pooldetail.state.PoolDetailUiState
+import com.livana.app.feature.pooldetail.viewmodel.PoolDetailViewModel
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.math.RoundingMode

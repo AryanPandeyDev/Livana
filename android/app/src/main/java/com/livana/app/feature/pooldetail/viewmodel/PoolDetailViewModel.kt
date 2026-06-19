@@ -1,4 +1,4 @@
-package com.livana.app.feature.pooldetail
+package com.livana.app.feature.pooldetail.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,13 +7,14 @@ import com.livana.app.core.common.BackendErrorCode
 import com.livana.app.core.common.DomainError
 import com.livana.app.core.common.LivanaResult
 import com.livana.app.core.data.repository.PoolRepository
+import com.livana.app.feature.pooldetail.state.PoolDetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class PoolDetailViewModel @Inject constructor(

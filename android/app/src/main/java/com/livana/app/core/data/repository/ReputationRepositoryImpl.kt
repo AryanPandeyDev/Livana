@@ -1,6 +1,7 @@
 package com.livana.app.core.data.repository
 
 import com.livana.app.core.common.LivanaResult
+import com.livana.app.core.model.NgoLeaderboardEntry
 import com.livana.app.core.model.NgoReputation
 import com.livana.app.core.model.PagedResult
 import com.livana.app.core.model.SbtMint
@@ -26,6 +27,15 @@ class ReputationRepositoryImpl @Inject constructor(
         size: Int?
     ): LivanaResult<PagedResult<SbtMint>> = try {
         reputationApi.getReputationHistory(address,page,size).toLivanaResult { it.toDomain() }
+    } catch (throwable: Throwable) {
+        LivanaResult.Failure(throwable.toDomainError())
+    }
+
+    override suspend fun getNgoLeaderboard(
+        limit: Int?
+    ): LivanaResult<List<NgoLeaderboardEntry>> = try {
+        reputationApi.getLeaderboard(limit = limit)
+            .toLivanaResult { entries -> entries.map { it.toDomain() } }
     } catch (throwable: Throwable) {
         LivanaResult.Failure(throwable.toDomainError())
     }
