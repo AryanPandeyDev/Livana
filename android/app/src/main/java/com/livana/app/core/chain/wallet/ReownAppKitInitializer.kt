@@ -51,8 +51,10 @@ object ReownAppKitInitializer {
         chainName = "Livana Chain",
         chainNamespace = "eip155",
         chainReference = BuildConfig.CHAIN_ID.toString(),
-        requiredMethods = listOf("personal_sign"),
-        optionalMethods = listOf("eth_sendTransaction", "eth_signTypedData_v4", "wallet_switchEthereumChain"),
+        // Both signing and sending must be REQUIRED so the wallet authorizes them for this chain;
+        // an optional method the wallet skips causes "method not authorized" on eth_sendTransaction.
+        requiredMethods = listOf("personal_sign", "eth_sendTransaction"),
+        optionalMethods = listOf("eth_signTypedData_v4", "wallet_switchEthereumChain"),
         events = listOf("chainChanged", "accountsChanged"),
         token = Modal.Model.Token(name = "USD Coin", symbol = "USDC", decimal = 6),
         rpcUrl = BuildConfig.RPC_URL,

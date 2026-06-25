@@ -3,6 +3,7 @@ package com.livana.app.core.chain.wallet
 import com.livana.app.BuildConfig
 import com.reown.appkit.client.AppKit
 import com.reown.appkit.client.Modal
+import com.reown.appkit.client.models.Session
 import com.reown.appkit.client.models.request.Request
 import com.reown.appkit.client.models.request.SentRequestResult
 import javax.inject.Inject
@@ -22,6 +23,8 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 @Singleton
 class ReownWalletConnector @Inject constructor() : WalletConnector {
@@ -44,7 +47,7 @@ class ReownWalletConnector @Inject constructor() : WalletConnector {
 
     private val delegate = object : AppKit.ModalDelegate {
         override fun onSessionApproved(approvedSession: Modal.Model.ApprovedSession) {
-            approvedSession.toConnected()?.let { _connectionState.value = it }
+            resolveConnected()?.let { _connectionState.value = it }
         }
 
         override fun onSessionRejected(rejectedSession: Modal.Model.RejectedSession) = Unit
@@ -70,7 +73,7 @@ class ReownWalletConnector @Inject constructor() : WalletConnector {
         if (configured) {
             AppKit.setDelegate(delegate)
             // Seed from an already-restored session (e.g. app relaunch).
-            scope.launch { seedFromExistingAccount() }
+            scope.launch { resolveConnected()?.let { _connectionState.value = it } }
         }
     }
 
@@ -80,7 +83,7 @@ class ReownWalletConnector @Inject constructor() : WalletConnector {
 
     override suspend fun connect(): WalletConnectionState {
         if (!configured) return WalletConnectionState.Disconnected
-        (connectionState.value as? WalletConnectionState.Connected)?.let { return it }
+        requireConnected()?.let { return it }
 
         withContext(Dispatchers.Main) { modalLauncher?.invoke() }
 
@@ -104,41 +107,87 @@ class ReownWalletConnector @Inject constructor() : WalletConnector {
 
     override suspend fun personalSign(message: String): PersonalSignResult {
         if (!configured) return PersonalSignResult.NoSession
-        val connected = connectionState.value as? WalletConnectionState.Connected
-            ?: return PersonalSignResult.NoSession
+        val connected = requireConnected() ?: return PersonalSignResult.NoSession
 
-        val request = Request(
-            method = PERSONAL_SIGN,
-            params = personalSignParams(message, connected.address),
-            chainId = connected.chainId,
-        )
+        return when (
+            val result = sendRequest(
+                method = PERSONAL_SIGN,
+                params = personalSignParams(message, connected.address),
+                chainId = connected.chainId,
+            )
+        ) {
+            is RpcResult.Success -> PersonalSignResult.Success(result.value)
+            RpcResult.Rejected -> PersonalSignResult.Rejected
+            is RpcResult.Failed -> PersonalSignResult.Failed(result.message)
+        }
+    }
+
+    override suspend fun sendTransaction(
+        toAddress: String,
+        data: String,
+        value: String,
+    ): TxResult {
+        if (!configured) return TxResult.NoSession
+        val connected = requireConnected() ?: return TxResult.NoSession
+
+        return when (
+            val result = sendRequest(
+                method = ETH_SEND_TRANSACTION,
+                params = sendTransactionParams(
+                    from = connected.address,
+                    to = toAddress,
+                    data = data,
+                    value = value,
+                ),
+                chainId = connected.chainId,
+            )
+        ) {
+            is RpcResult.Success -> TxResult.Sent(result.value)
+            RpcResult.Rejected -> TxResult.Rejected
+            is RpcResult.Failed -> TxResult.Failed(result.message)
+        }
+    }
+
+    /**
+     * Sends a JSON-RPC request through AppKit and awaits its response, correlating by the JSON-RPC
+     * id from the sent request. Shared by [personalSign] and [sendTransaction].
+     */
+    private suspend fun sendRequest(method: String, params: String, chainId: String): RpcResult {
+        val request = Request(method = method, params = params, chainId = chainId)
 
         val sentRequestId = CompletableDeferred<Long?>()
+        val sendError = CompletableDeferred<String?>()
         withContext(Dispatchers.Main) {
             AppKit.request(
                 request = request,
                 onSuccess = { sent ->
+                    sendError.complete(null)
                     sentRequestId.complete((sent as? SentRequestResult.WalletConnect)?.requestId)
                 },
-                onError = { sentRequestId.complete(null) },
+                onError = { throwable ->
+                    sendError.complete(throwable.message)
+                    sentRequestId.complete(null)
+                },
             )
         }
 
         val requestId = sentRequestId.await()
-            ?: return PersonalSignResult.Failed("Could not send the signing request")
+            ?: return RpcResult.Failed(
+                "Could not send the request to your wallet" +
+                    (sendError.await()?.let { ": $it" } ?: ""),
+            )
 
-        val response = withTimeoutOrNull(SIGN_TIMEOUT_MS) {
+        val response = withTimeoutOrNull(REQUEST_TIMEOUT_MS) {
             requestResponses.first { it.result.id == requestId }
-        } ?: return PersonalSignResult.Failed("Timed out waiting for the wallet signature")
+        } ?: return RpcResult.Failed("Timed out waiting for your wallet")
 
         return when (val result = response.result) {
             is Modal.Model.JsonRpcResponse.JsonRpcResult ->
-                (result.result as? String)?.let { PersonalSignResult.Success(it) }
-                    ?: PersonalSignResult.Failed("Wallet returned an empty signature")
+                (result.result as? String)?.let { RpcResult.Success(it) }
+                    ?: RpcResult.Failed("Wallet returned an empty response")
 
             is Modal.Model.JsonRpcResponse.JsonRpcError ->
-                if (result.isUserRejection()) PersonalSignResult.Rejected
-                else PersonalSignResult.Failed(result.message)
+                if (result.isUserRejection()) RpcResult.Rejected else RpcResult.Failed(result.message)
         }
     }
 
@@ -158,19 +207,6 @@ class ReownWalletConnector @Inject constructor() : WalletConnector {
         }
     }
 
-    private fun Modal.Model.ApprovedSession.toConnected(): WalletConnectionState.Connected? = when (this) {
-        is Modal.Model.ApprovedSession.WalletConnectSession ->
-            accounts.firstOrNull()?.let { caip10 ->
-                WalletConnectionState.Connected(
-                    address = caip10.substringAfterLast(':'),
-                    chainId = caip10.substringBeforeLast(':'),
-                )
-            }
-
-        is Modal.Model.ApprovedSession.CoinbaseSession ->
-            WalletConnectionState.Connected(address = address, chainId = chain)
-    }
-
     private fun Modal.Model.JsonRpcResponse.JsonRpcError.isUserRejection(): Boolean =
         code == USER_REJECTED_CODE_WC ||
             code == USER_REJECTED_CODE_EIP1193 ||
@@ -185,11 +221,78 @@ class ReownWalletConnector @Inject constructor() : WalletConnector {
         return JsonArray(listOf(JsonPrimitive(hex), JsonPrimitive(address))).toString()
     }
 
+    /** eth_sendTransaction params: a single tx object `[{ from, to, data, value }]`. */
+    private fun sendTransactionParams(
+        from: String,
+        to: String,
+        data: String,
+        value: String,
+    ): String {
+        val tx = buildJsonObject {
+            put("from", from)
+            put("to", to)
+            put("data", data)
+            put("value", value)
+        }
+        return JsonArray(listOf(tx)).toString()
+    }
+
+    /**
+     * Returns the current connected account with a *valid* address, re-resolving from the active
+     * WalletConnect session when the cached state is missing/blank (e.g. after an app relaunch where
+     * `getAccount()` hasn't repopulated). Updates [_connectionState] when it re-resolves.
+     */
+    private fun requireConnected(): WalletConnectionState.Connected? {
+        (connectionState.value as? WalletConnectionState.Connected)
+            ?.takeIf { it.address.isEvmAddress() }
+            ?.let { return it }
+
+        val resolved = resolveConnected()
+        if (resolved != null) _connectionState.value = resolved
+        return resolved
+    }
+
+    /**
+     * Resolves the connected account for the target chain, preferring the session's approved
+     * accounts (the authoritative source) and falling back to [AppKit.getAccount].
+     */
+    private fun resolveConnected(): WalletConnectionState.Connected? {
+        val target = "eip155:${BuildConfig.CHAIN_ID}"
+
+        val sessionAccount = runCatching {
+            (AppKit.getSession() as? Session.WalletConnectSession)
+                ?.namespaces?.values
+                ?.flatMap { it.accounts }
+                ?.firstOrNull { it.startsWith("$target:") }
+        }.getOrNull()
+
+        sessionAccount?.substringAfterLast(':')?.takeIf { it.isEvmAddress() }?.let { address ->
+            return WalletConnectionState.Connected(address = address, chainId = target)
+        }
+
+        val account = runCatching { AppKit.getAccount() }.getOrNull()
+        if (account != null && account.address.isEvmAddress()) {
+            return WalletConnectionState.Connected(address = account.address, chainId = account.chain.id)
+        }
+        return null
+    }
+
+    private sealed interface RpcResult {
+        data class Success(val value: String) : RpcResult
+        data object Rejected : RpcResult
+        data class Failed(val message: String?) : RpcResult
+    }
+
     private companion object {
         const val PERSONAL_SIGN = "personal_sign"
+        const val ETH_SEND_TRANSACTION = "eth_sendTransaction"
         const val USER_REJECTED_CODE_WC = 5000
         const val USER_REJECTED_CODE_EIP1193 = 4001
         const val CONNECT_TIMEOUT_MS = 180_000L
-        const val SIGN_TIMEOUT_MS = 180_000L
+        const val REQUEST_TIMEOUT_MS = 180_000L
     }
 }
+
+private val EVM_ADDRESS_REGEX = Regex("^0x[a-fA-F0-9]{40}$")
+
+private fun String.isEvmAddress(): Boolean = EVM_ADDRESS_REGEX.matches(this)

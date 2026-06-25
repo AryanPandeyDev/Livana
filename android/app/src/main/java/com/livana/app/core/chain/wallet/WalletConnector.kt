@@ -29,6 +29,16 @@ interface WalletConnector {
     /** Request an EIP-191 `personal_sign` of [message] (sent verbatim) from the connected wallet. */
     suspend fun personalSign(message: String): PersonalSignResult
 
+    /**
+     * Submit an `eth_sendTransaction` from the connected account to [toAddress] with calldata
+     * [data] and (hex-wei) [value]. Returns the broadcast tx hash or a typed failure.
+     */
+    suspend fun sendTransaction(
+        toAddress: String,
+        data: String,
+        value: String = "0x0",
+    ): TxResult
+
     /** Forward a redirect deep link (wallet returning to the app) to the SDK. */
     fun handleDeepLink(url: String)
 }

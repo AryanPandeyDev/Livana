@@ -1,16 +1,12 @@
 package com.livana.app.core.navigation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -24,7 +20,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.livana.app.core.designsystem.theme.LivanaColors
 import com.livana.app.core.designsystem.theme.LivanaTheme
+import com.livana.app.feature.activity.MyDonationsScreen
 import com.livana.app.feature.auth.SignInScreen
+import com.livana.app.feature.donate.DonateScreen
 import com.livana.app.feature.explore.ExploreScreen
 import com.livana.app.feature.home.HomeScreen
 import com.livana.app.feature.leaderboard.BoardsScreen
@@ -96,7 +94,14 @@ fun LivanaNavHost(
                     onOpenNgo = { ngoAddress -> navController.navigateToNgoProfile(ngoAddress) },
                 )
             }
-            composable(Destination.Activity.route) { LivanaTabPlaceholder("Activity") }
+            composable(Destination.Activity.route) {
+                MyDonationsScreen(
+                    onOpenPool = { address -> navController.navigateToPoolDetail(address) },
+                    onSignIn = { navController.navigateToSignIn() },
+                    onLinkWallet = { navController.navigateToLinkWallet() },
+                    onExplore = { navController.navigateToTopLevelDestination(Destination.Explore) },
+                )
+            }
             composable(Destination.Profile.route) {
                 ProfileScreen(
                     onSignIn = { navController.navigateToSignIn() },
@@ -112,7 +117,7 @@ fun LivanaNavHost(
                 val address = backStackEntry.arguments?.getString("address").orEmpty()
                 PoolDetailScreen(
                     onBack = { navController.popBackStack() },
-                    onDonate = { /* TODO: wire Donate once the donate screen exists. */ },
+                    onDonate = { navController.navigateToDonate(address) },
                     onOpenNgo = { ngoAddress -> navController.navigateToNgoProfile(ngoAddress) },
                     onSeeAllDonations = { navController.navigateToPoolDonations(address) },
                     onSeeAllProofs = { navController.navigateToPoolProofs(address) },
@@ -160,6 +165,18 @@ fun LivanaNavHost(
                     onLinked = { navController.popBackStack() },
                 )
             }
+            composable(
+                route = Destination.Donate.route,
+                arguments = listOf(
+                    navArgument("address") { type = NavType.StringType },
+                ),
+            ) {
+                DonateScreen(
+                    onBack = { navController.popBackStack() },
+                    onNeedSignIn = { navController.navigateToSignIn() },
+                    onNeedWallet = { navController.navigateToLinkWallet() },
+                )
+            }
         }
     }
 }
@@ -184,6 +201,10 @@ private fun NavHostController.navigateToNgoProfile(address: String) {
     navigate(Destination.NgoProfile.route.replace("{address}", address))
 }
 
+private fun NavHostController.navigateToDonate(address: String) {
+    navigate(Destination.Donate.route.replace("{address}", address))
+}
+
 private fun NavHostController.navigateToSignIn() {
     navigate(Destination.SignIn.route)
 }
@@ -199,20 +220,6 @@ private fun NavHostController.navigateToTopLevelDestination(destination: Destina
         }
         launchSingleTop = true
         restoreState = true
-    }
-}
-
-@Composable
-private fun LivanaTabPlaceholder(tabName: String) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = tabName,
-            color = LivanaColors.Text,
-            style = MaterialTheme.typography.headlineLarge,
-        )
     }
 }
 

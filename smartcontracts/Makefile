@@ -60,6 +60,8 @@ MAX_PER_NGO_POOL ?= 5000000000
 # Amounts
 AMOUNT   ?= 1000000000
 PROOF_ID ?= 0x0000000000000000000000000000000000000000000000000000000000000001
+METADATA_CID ?= QmDefaultMetadataCid
+
 
 # Anvil state file (for persisting seeded data)
 ANVIL_STATE_FILE ?= anvil-state.json
@@ -193,6 +195,11 @@ seed: ## Deploy all contracts, populate test data, save addresses to seed-data.j
 	@echo "Anvil state will auto-save when you Ctrl+C (if started with 'make anvil')"
 	@echo "To restart Anvil with saved state: make anvil-load"
 
+.PHONY: dump-state
+dump-state: ## Dump current Anvil state to file
+	powershell -NoProfile -ExecutionPolicy Bypass -File script/dump-anvil-state.ps1 $(ANVIL_STATE_FILE) $(RPC_URL)
+
+
 # ==============================================================================
 # Deployment Scripts
 # ==============================================================================
@@ -215,6 +222,7 @@ deploy-factory: ## Deploy PoolFactory (needs ADMIN, VERIFIER, USDC env vars)
 .PHONY: deploy-pool
 deploy-pool: ## Deploy a CrisisPool via factory (needs FACTORY, caps)
 	FACTORY=$(FACTORY) \
+	METADATA_CID=$(METADATA_CID) \
 	MAX_PER_CLAIM=$(MAX_PER_CLAIM) \
 	MAX_PER_NGO_DAY=$(MAX_PER_NGO_DAY) \
 	MAX_PER_NGO_POOL=$(MAX_PER_NGO_POOL) \
